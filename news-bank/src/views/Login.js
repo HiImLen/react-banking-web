@@ -2,7 +2,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { set, useForm } from 'react-hook-form';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import dog3 from '../assets/img/dogs/image3.jpeg';
+import img_login from '../assets/img/login-img.jpeg';
 
 import { instance, parseJwt } from '../utils.js';
 export default function Login (props) {
@@ -77,7 +77,7 @@ export default function Login (props) {
                         <div className="card-body p-0">
                             <div className="row">
                                 <div className="col-lg-6 d-none d-lg-flex">
-                                    <div className="flex-grow-1 bg-login-image" style={{ backgroundImage: "url(" + dog3 + ")" }} />
+                                    <div className="flex-grow-1 bg-login-image" style={{ backgroundImage: "url(" + img_login + ")" }} />
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="p-5">

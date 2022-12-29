@@ -1,7 +1,7 @@
 import { set, useForm } from 'react-hook-form';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import dog2 from '../assets/img/dogs/image2.jpeg';
+import sign_up_img from '../assets/img/Banking-_Services.jpg';
 
 import { instance, parseJwt } from '../utils.js';
 export default function SignUp(props) {
@@ -64,7 +64,7 @@ export default function SignUp(props) {
                 <div className="card-body p-0">
                     <div className="row">
                         <div className="col-lg-5 d-none d-lg-flex">
-                            <div className="flex-grow-1 bg-register-image" style={{ backgroundImage: "url(" + dog2 + ")" }} />
+                            <div className="flex-grow-1 bg-register-image" style={{ backgroundImage: "url(" + sign_up_img + ")" }} />
                         </div>
                         <div className="col-lg-7">
                             <div className="p-5">
