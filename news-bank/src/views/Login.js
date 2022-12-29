@@ -24,7 +24,7 @@ export default function Login (props) {
         try {
             console.log(data);
             const res = await instance.post('/Users/Login', data);
-            if (res.data.authenticated) {
+            if (res.data.token != null) {
                 // console.log(res.data.token);
                 localStorage.token = res.data.token;
 
