@@ -3,6 +3,7 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import Homepage from './components/Homepage.js';
 import Login from './views/Login.js';
 import SignUp from './views/SignUp.js';
+import Forgot from './views/Forgot.js';
 
 const theme = createTheme({
   palette:{
@@ -30,6 +31,7 @@ const App = () => {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/forgot" element={<Forgot />} />
           <Route path="/" element={
             <RequireAuth>
               <Homepage />

@@ -14,7 +14,7 @@ export default function Login (props) {
     
     useEffect(() => {
         LoggedIn();
-    }, []);
+    });
 
     const onSubmit = async (data) => {
         if (capValue === null || capValue === undefined || capValue === "") {
@@ -24,18 +24,20 @@ export default function Login (props) {
         try {
             console.log(data);
             const res = await instance.post('/Users/Login', data);
-            if (res.data.token != null) {
-                // console.log(res.data.token);
-                localStorage.token = res.data.token;
+            if (res.status) {
+                localStorage.token = res.data.data.token;
 
-                const obj = parseJwt(res.data.token);
+                const obj = parseJwt(res.data.data.token);
                 localStorage.userId = obj.userId;
 
                 // console.log(location.state);
                 const retUrl = location.state?.from?.pathname || '/';
                 nagivate(retUrl);
-            } else {
-                alert('Invalid login.');
+            } else if (res.status === 401) {
+                alert('Invalid credential.');
+            }
+            else {
+                alert('Cannot login right now.');
             }
         } catch (error) {
             if (error.response) {
@@ -93,11 +95,11 @@ export default function Login (props) {
                                                 <input className="form-control form-control-user" type="password" id="exampleInputPassword" placeholder="Password" name="password" autoFocus {...register('password', { required: true })} />
                                                 {errors.password && <span className="error-message">*</span>}
                                             </div>
-                                            <div className="mb-3">
+                                            {/* <div className="mb-3">
                                                 <div className="custom-control custom-checkbox small">
                                                     <div className="form-check"><input className="form-check-input custom-control-input" type="checkbox" id="formCheck-1" /><label className="form-check-label custom-control-label" htmlFor="formCheck-1">Remember Me</label></div>
                                                 </div>
-                                            </div>
+                                            </div> */}
                                             <div className="mb-3 d-flex justify-content-center">
                                                 <ReCAPTCHA
                                                     sitekey="6Le2nbMjAAAAAOhaMDHl3jYdxh0GF4YQ3sMaHYCz"
@@ -107,10 +109,10 @@ export default function Login (props) {
                                             <button className="btn btn-primary d-block btn-user w-100" type="submit">
                                                 Login
                                             </button>
-                                            <hr />
                                         </form>
-                                        <div className="text-center"><Link to ="/forgot">Forgot Password?</Link></div>
-                                        <div className="text-center"><Link to ="/signup">Create an Account!</Link></div>
+                                        <hr />
+                                        <div className="text-center small"><Link to ="/forgot">Forgot Password?</Link></div>
+                                        {/* <div className="text-center small"><Link to ="/signup">Create an Account!</Link></div> */}
                                     </div>
                                 </div>
                             </div>
