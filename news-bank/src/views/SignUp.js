@@ -1,6 +1,6 @@
-import { set, useForm } from 'react-hook-form';
+import {  useForm } from 'react-hook-form';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import sign_up_img from '../assets/img/Banking-_Services.jpg';
 
 import { instance, parseJwt } from '../utils.js';

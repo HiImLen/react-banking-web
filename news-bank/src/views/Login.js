@@ -1,5 +1,5 @@
 import ReCAPTCHA from "react-google-recaptcha";
-import { set, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import img_login from '../assets/img/login-img.jpeg';
@@ -17,7 +17,7 @@ export default function Login (props) {
     }, []);
 
     const onSubmit = async (data) => {
-        if (capValue == null || capValue == undefined || capValue == "") {
+        if (capValue === null || capValue === undefined || capValue === "") {
             alert('Please verify that you are not a robot.');
             return;
         }

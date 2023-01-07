@@ -1,21 +1,42 @@
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import Bank from './views/Bank.js';
+import { createTheme, ThemeProvider } from '@mui/material';
+import Homepage from './components/Homepage.js';
 import Login from './views/Login.js';
 import SignUp from './views/SignUp.js';
 
+const theme = createTheme({
+  palette:{
+    primary:{
+      main: '#4D54E4',
+      secondary:'#22343D',
+    },
+    overrides: {
+      MuiButton: {
+        raisedPrimary: {
+          color: 'white',
+        },
+      },
+    },
+    text:{
+      primary:'#000000',
+      secondary: '#4D54E4',
+    },
+  },
+})
+
+
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/" element={
-          <RequireAuth>
-            <Bank />
-          </RequireAuth>
-        } />
-      </Routes>
-    </BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={
+            <RequireAuth>
+              <Homepage />
+            </RequireAuth>
+          } />
+        </Routes>
+    
   )
 }
 

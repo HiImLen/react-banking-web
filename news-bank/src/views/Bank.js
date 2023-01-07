@@ -2,8 +2,8 @@ import { useEffect, useReducer } from 'react';
 
 import AppContext from '../AppContext.js';
 import reducer, { initializer } from '../AppReducer.js';
-import NavBar from '../components/NavBar.js';
-import { instance } from '../utils.js';
+import Homepage from '../components/Homepage.js';
+//import { instance } from '../utils.js';
 
 const Bank = () => {
     const [store, dispatch] = useReducer(reducer, {}, initializer);
@@ -15,7 +15,7 @@ const Bank = () => {
     return (
         <div>
             <AppContext.Provider value={{ store, dispatch }}>
-                <NavBar />
+                <Homepage />
             </AppContext.Provider>
         </div>
     )
