@@ -1,27 +1,30 @@
-import { Box, Paper, Typography } from "@mui/material";
-import ATMPic from '../../assets/img/ATM_pic.svg'
+import { Box, Button, Paper, Typography } from "@mui/material";
+import ATMPic from '../../assets/img/ATM_pic.svg';
+import FundTransfer from '../../assets/icon/FundTransfer.svg';
+import DebtReminder from '../../assets/icon/DebtReminder.svg';
+import RecentTrans from '../../assets/icon/RecentTrans.svg';
 
 export default function HomepageCP() {
     return(
-        <div className="grid grid-rows-5">
+        <div className="grid grid-rows-5 gap-y-14">
             <Paper 
                 className='row-span-3 grid grid-rows-6 py-3 px-5' 
                 elevation={2}
                 sx={{borderRadius: '10px'}}
-            >
+                >
                 <div className="grid grid-cols-2">
                     <Typography className='text-black' style={{fontWeight:600}}>My Card</Typography>
                     <Typography className='text-black text-left' style={{fontWeight:600}}>Details</Typography>
                 </div>
                 <div className="row-span-5 grid grid-cols-2">
                     <Box 
-                        className="p"
                         style={{
                             backgroundImage: `url(${ATMPic})`, 
                             backgroundRepeat: 'no-repeat',
                             backgroundSize: 'contain', 
-                            }}
-                    >
+                            aspectRatio: '2/1'
+                        }}
+                        >
                     </Box>
                     <div className="grid grid-rows-3 content-center">
                         <div className="grid grid-cols-2 content-center py-3">
@@ -51,6 +54,36 @@ export default function HomepageCP() {
                     </div>
                 </div>
             </Paper> 
+            <Paper 
+                className='row-span-2 grid grid-cols-3 justify-items-center content-center py-3 px-5' 
+                elevation={2}
+                sx={{borderRadius: '10px'}}
+            >
+                <div className="flex rounded-lg" style={{backgroundColor:'#DAEEFF', height:'10vw', width:'10vw'}}>
+                    <Button className="flex flex-grow">
+                        <div className="flex flex-grow flex-col items-center gap-y-2">
+                            <div style={{height:'59px', width:'59px'}}><img src={FundTransfer} alt='FundTransfer'/></div>
+                            <Typography className='text-black' style={{textTransform:'none'}}>Fund Transfer</Typography>   
+                        </div>
+                    </Button>
+                </div>
+                <div className="flex rounded-lg" style={{backgroundColor:'#DAEEFF', height:'10vw', width:'10vw'}}>
+                    <Button className="flex flex-grow">
+                        <div className="flex flex-grow flex-col items-center gap-y-2">
+                            <div style={{height:'59px', width:'59px'}}><img src={DebtReminder} alt='DebtReminder'/></div>
+                            <Typography className='text-black' style={{textTransform:'none'}}>Debt Reminder Management</Typography>   
+                        </div>
+                    </Button>
+                </div>
+                <div className="flex rounded-lg" style={{backgroundColor:'#DAEEFF', height:'10vw', width:'10vw'}}>
+                    <Button className="flex flex-grow">
+                        <div className="flex flex-grow flex-col items-center gap-y-2">
+                            <div style={{height:'59px', width:'59px'}}><img src={RecentTrans} alt='RecentTrans'/></div>
+                            <Typography className='text-black' style={{textTransform:'none'}}>Recent Transactions</Typography>   
+                        </div>
+                    </Button>
+                </div>
+            </Paper>
         </div>
     )
 }

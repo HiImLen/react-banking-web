@@ -12,11 +12,11 @@ export default function Homepage(props) {
             <Sidebar/>
             <div className='col-span-4 grid grid-rows-6 '>
                 <Navbar/>
-                <div className='row-span-5 grid grid-cols-7'>
-                    <div className='col-span-5 mr-5'>
+                <div className='row-span-5 grid grid-cols-7 gap-x-5 mx-3'>
+                    <div className='col-span-5'>
                         <HomepageCP/>  
                     </div>
-                    <div className='col-span-2 mr-5'>
+                    <div className='col-span-2'>
                         <QuickUtility/>
                     </div>
                 </div>

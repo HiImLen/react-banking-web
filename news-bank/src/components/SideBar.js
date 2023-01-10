@@ -10,7 +10,7 @@ export default function SideBar(props) {
                 <Typography className="flex items-center" color='primary' style={{fontWeight:600}}>Swen Bank</Typography>
             </div>
             <Box className="flex flex-col flex-grow p-3" style={{borderRadius:'40px 40px 0px 0px'}} bgcolor='primary.main'>
-                <Typography className='text-black' style={{fontWeight:600}}>DO TIEN TRUNG</Typography>
+                <Typography className='text-black' style={{fontWeight:600}}>Home</Typography>
 
             </Box>
         </Paper>
