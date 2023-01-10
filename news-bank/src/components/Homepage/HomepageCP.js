@@ -6,7 +6,9 @@ import RecentTrans from '../../assets/icon/RecentTrans.svg';
 
 export default function HomepageCP() {
     return(
+        // Những phần ở giữa hompage và ko bao gồm QuickUtility
         <div className="grid grid-rows-5 gap-y-14">
+            {/* Chi tiết thông tin card */}
             <Paper 
                 className='row-span-3 grid grid-rows-6 py-3 px-5' 
                 elevation={2}
@@ -17,15 +19,24 @@ export default function HomepageCP() {
                     <Typography className='text-black text-left' style={{fontWeight:600}}>Details</Typography>
                 </div>
                 <div className="row-span-5 grid grid-cols-2">
+                    {/* Thông tin thẻ trên hình */}
                     <Box 
-                        style={{
+                        className="grid grid-rows-2 p-4 mr-8"
+                        sx={{
                             backgroundImage: `url(${ATMPic})`, 
                             backgroundRepeat: 'no-repeat',
                             backgroundSize: 'contain', 
                             aspectRatio: '2/1'
                         }}
-                        >
+                    >
+                        <div className="invisible"></div>
+                        <div className="grid grid-rows-3">
+                            <Typography className='text-white' style={{fontWeight:600}}>1309 05452 55215</Typography>
+                            <Typography className='text-white'>01/01/2023</Typography>
+                            <Typography className='text-white' style={{textTransform:'uppercase'}}>Do Tien Trung</Typography>
+                        </div>
                     </Box>
+                    {/* Thông tin chi tiết */}
                     <div className="grid grid-rows-3 content-center">
                         <div className="grid grid-cols-2 content-center py-3">
                             <div className="flex flex-col">
@@ -54,6 +65,7 @@ export default function HomepageCP() {
                     </div>
                 </div>
             </Paper> 
+            {/* Các chức năng ở dưới */}
             <Paper 
                 className='row-span-2 grid grid-cols-3 justify-items-center content-center py-3 px-5' 
                 elevation={2}

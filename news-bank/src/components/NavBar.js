@@ -28,7 +28,7 @@ export default function NavBar() {
     return (
       <div className="flex flex-row justify-between items-center">
         <Typography className='text-black' style={{fontWeight:600}}>Home</Typography>
-
+        {/* user menu */}
         <Button
           id="basic-button"
           className='flex flex-row justify-center space-x-1'

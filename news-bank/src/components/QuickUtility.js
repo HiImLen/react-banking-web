@@ -6,6 +6,7 @@ import RightArrow from '../assets/icon/RightArrow.svg';
 
 export default function QuickUtility() {
     return(
+        // gồm 3 button chức năng
         <div className="grid grid-rows-5">
             <Paper 
                 className='row-span-3 p-3 space-y-2' 
