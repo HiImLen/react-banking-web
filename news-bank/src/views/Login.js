@@ -35,10 +35,13 @@ export default function Login(props) {
             console.log(data);
             const res = await instance.post('/Users/Login', data);
             if (res.status === 200) {
+                console.log(res);
                 localStorage.token = res.data.data.token;
 
+
                 const obj = parseJwt(res.data.data.token);
-                localStorage.userId = obj.userId;
+                console.log(obj);
+                localStorage.userId = obj.id;
 
                 // console.log(location.state);
                 const retUrl = location.state?.from?.pathname || '/';

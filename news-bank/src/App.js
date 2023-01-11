@@ -4,6 +4,7 @@ import Homepage from './components/Homepage.js';
 import Login from './views/Login.js';
 import SignUp from './views/SignUp.js';
 import Forgot from './views/Forgot.js';
+import OTPVerify from './components/FundTransfer/OTPVerify.js';
 
 const theme = createTheme({
   palette:{
@@ -37,6 +38,11 @@ const App = () => {
               <Homepage />
             </RequireAuth>
           } />
+          <Route path="/otpVerify" element={
+            <RequireAuth>
+              <OTPVerify />
+            </RequireAuth>
+          }/>
         </Routes>
     
   )
