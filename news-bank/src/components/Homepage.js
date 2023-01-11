@@ -5,6 +5,7 @@ import InterTransfer from './FundTransfer/InterTransfer/InterTransfer';
 import Sidebar from './SideBar';
 import Navbar from './NavBar';
 import QuickUtility from './QuickUtility';
+import InternalTransfer from './FundTransfer/InternalTransfer';
 
 export default function Homepage() {
     return (
@@ -14,7 +15,7 @@ export default function Homepage() {
                 <Navbar/>
                 <div className='row-span-5 grid grid-cols-7 gap-x-5 mx-3'>
                     <div className='col-span-5'>
-                        <InterTransfer/>
+                        <InternalTransfer/>  
                     </div>
                     <div className='col-span-2'>
                         <QuickUtility/>

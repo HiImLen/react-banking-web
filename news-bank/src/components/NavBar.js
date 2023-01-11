@@ -6,7 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import avt from '../assets/img/avt.svg';
-import Signout from '../assets/img/Signout.svg';
+import Signout from '../assets/img/signout.svg';
 import DownArrow from '../assets/icon/DownArrow.svg';
 import notification from '../assets/icon/notification.svg';
 

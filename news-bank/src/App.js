@@ -4,6 +4,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import Login from './views/Login.js';
 import SignUp from './views/SignUp.js';
 import Forgot from './views/Forgot.js';
+import OTPVerify from './components/FundTransfer/OTPVerify.js';
 import Bank from './views/Bank.js';
 
 // const theme = createTheme({
@@ -38,6 +39,11 @@ const App = () => {
               <Bank />
             </RequireAuth>
           } />
+          <Route path="/otpVerify" element={
+            <RequireAuth>
+              <OTPVerify />
+            </RequireAuth>
+          }/>
 
         </Routes>
   )

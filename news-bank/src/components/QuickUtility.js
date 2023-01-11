@@ -4,8 +4,10 @@ import TransferWithinBank from '../assets/img/Quick utility/TransferWithinBank.s
 import InterbankTransfer from '../assets/img/Quick utility/InterbankTransfer.svg';
 import RecentTransaction from '../assets/img/Quick utility/RecentTransaction.svg';
 import RightArrow from '../assets/icon/RightArrow.svg';
+import { useNavigate } from "react-router";
 
 export default function QuickUtility() {
+    const nagivate = useNavigate();
     return(
         // gồm 3 button chức năng
         <div className="grid grid-rows-5">
@@ -20,7 +22,9 @@ export default function QuickUtility() {
                             <Button className="flex flex-grow">
                                 <Box className="flex flex-row flex-grow justify-between px-2">
                                     <img src={TransferWithinBank} alt='TransferWithinBank'/>
-                                    <Typography className='text-black text-left self-center' style={{textTransform: 'none'}}>Transfer Within Bank</Typography>
+                                    <button onClick={() => {nagivate('/transfer/internal')}}>
+                                        <Typography className='text-black text-left self-center' style={{textTransform: 'none'}}>Transfer Within Bank</Typography>
+                                    </button>
                                     <img src={RightArrow} alt='RightArrow'/>
                                 </Box>
                             </Button>
