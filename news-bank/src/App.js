@@ -7,10 +7,10 @@ import SignUp from './views/SignUp.js';
 import Forgot from './views/Forgot.js';
 import OTPVerify from './components/FundTransfer/OTPVerify.js';
 import InternalTransfer from './components/FundTransfer/InternalTransfer.js';
-import { parseJwt } from './utils.js';
 import { useEffect } from 'react';
 import HomepageCP from './components/Homepage/HomepageCP.js';
 import Bank from './views/Bank.js';
+import Transaction from './components/FundTransfer/Transaction.js';
 
 // const theme = createTheme({
 //   palette:{
@@ -50,6 +50,7 @@ const App = () => {
             <Route index element={<HomepageCP/>} />
             <Route exact path="transfer" element={<InternalTransfer />} />
             <Route exact path='otpVerify' element={<OTPVerify />} />
+            <Route path="transaction/:status" element={<Transaction/>}/>
           </Route>
         </Routes>
   )
@@ -58,10 +59,6 @@ const App = () => {
 const RequireAuth = ({ children }) => {
 
   const location = useLocation();
-
-
-  const decode = parseJwt(localStorage.token);
-  console.log(decode);
 
   if (!localStorage.token) {
     return <Navigate to={'/login'} state={{ from: location }} />
