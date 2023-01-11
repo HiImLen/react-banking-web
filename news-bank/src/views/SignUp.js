@@ -1,10 +1,11 @@
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import sign_up_img from '../assets/img/Banking-_Services.jpg';
 import { instance } from '../utils.js';
 
-export default function SignUp(props) {
+export default function SignUp() {
     const nagivate = useNavigate();
     const location = useLocation();
 

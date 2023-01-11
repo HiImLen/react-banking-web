@@ -8,7 +8,6 @@ import * as bootstrap from 'bootstrap';
   
   if (sidebar) {
     
-    var collapseEl = sidebar.querySelector('.collapse');
     var collapseElementList = [].slice.call(document.querySelectorAll('.sidebar .collapse'))
     var sidebarCollapseList = collapseElementList.map(function (collapseEl) {
       return new bootstrap.Collapse(collapseEl, { toggle: false });
@@ -17,7 +16,7 @@ import * as bootstrap from 'bootstrap';
     for (var toggle of sidebarToggles) {
 
       // Toggle the side navigation
-      toggle.addEventListener('click', function(e) {
+      toggle.addEventListener('click', function() {
         document.body.classList.toggle('sidebar-toggled');
         sidebar.classList.toggle('toggled');
 
@@ -25,7 +24,7 @@ import * as bootstrap from 'bootstrap';
           for (var bsCollapse of sidebarCollapseList) {
             bsCollapse.hide();
           }
-        };
+        }
       });
     }
 
@@ -37,7 +36,7 @@ import * as bootstrap from 'bootstrap';
         for (var bsCollapse of sidebarCollapseList) {
           bsCollapse.hide();
         }
-      };
+      }
     });
   }
 

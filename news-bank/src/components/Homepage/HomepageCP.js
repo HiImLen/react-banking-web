@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Button, Paper, Typography } from "@mui/material";
 import ATMPic from '../../assets/img/ATM_pic.svg';
 import FundTransfer from '../../assets/icon/FundTransfer.svg';

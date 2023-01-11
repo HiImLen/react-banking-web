@@ -1,13 +1,13 @@
-import { useForm } from 'react-hook-form';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import React from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import img_forgot from '../assets/img/forgot.jpg';
 import ResetPassword from '../components/Forgot/ResetPassword';
 import VerifyOTP from '../components/Forgot/VerifyOTP';
 
-export default function Forgot(props) {
+export default function Forgot() {
     const nagivate = useNavigate();
-    const location = useLocation();
+    //const location = useLocation();
 
     const [isReset, setIsReset] = useState(false);
 

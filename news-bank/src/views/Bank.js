@@ -1,5 +1,5 @@
+import React from 'react';
 import { useEffect, useReducer } from 'react';
-
 import AppContext from '../AppContext.js';
 import reducer, { initializer } from '../AppReducer.js';
 import Homepage from '../components/Homepage.js';

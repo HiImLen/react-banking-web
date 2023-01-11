@@ -1,3 +1,4 @@
+import React from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
@@ -5,11 +6,11 @@ import { useEffect, useState } from 'react';
 import img_login from '../assets/img/login-img.jpeg';
 import { instance, parseJwt } from '../utils.js';
 
-export default function Login(props) {
+export default function Login() {
     const nagivate = useNavigate();
     const location = useLocation();
 
-    const { register, handleSubmit, setError, clearErrors, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm();
     const [capValue, setCapValue] = useState("");
 
     useEffect(() => {

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Button, Paper, Typography } from "@mui/material";
 import TransferWithinBank from '../assets/img/Quick utility/TransferWithinBank.svg';
 import InterbankTransfer from '../assets/img/Quick utility/InterbankTransfer.svg';
