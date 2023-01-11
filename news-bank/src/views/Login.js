@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import img_login from '../assets/img/login-img.jpeg';
-import { instance, parseJwt } from '../utils.js';
+import { instance } from '../utils.js';
 
 export default function Login() {
     const nagivate = useNavigate();
@@ -38,11 +38,7 @@ export default function Login() {
             if (res.status === 200) {
                 console.log(res);
                 localStorage.token = res.data.data.token;
-
-
-                const obj = parseJwt(res.data.data.token);
-                console.log(obj);
-                localStorage.userId = obj.id;
+                localStorage.refreshToken = res.data.data.refreshToken;
 
                 // console.log(location.state);
                 const retUrl = location.state?.from?.pathname || '/';
