@@ -1,10 +1,11 @@
-import { get, useForm } from 'react-hook-form';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 import { Box, Button, FormControl, InputLabel, MenuItem, Paper, Select, Typography } from '@mui/material';
 import avt from '../../assets/img/avt2.svg'
-import { instance, parseJwt } from '../../utils.js';
+import { instance } from '../../utils.js';
 import { useState } from 'react';
-import { parsePath, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 export default function InternalTransfer() {
   const { register, handleSubmit, setValue, setError,clearErrors, formState: { errors } } = useForm();
@@ -26,8 +27,8 @@ export default function InternalTransfer() {
         if (res.data.status === "success"){
             nagivate('/otpVerify')
         }
-    } catch (error) { 
-
+    } catch (error) {
+      console.log(error);   
     }
   } 
   const valueOfMoney= [100000,200000,500000,1000000,2000000,5000000]
@@ -80,7 +81,7 @@ export default function InternalTransfer() {
                     </FormControl>
                     <TextField className='border-sky-500 border-2' id="outlined-basic" placeholder="Amount VND" variant="outlined" {...register("amount", {required: true})} type="number" />
                     <Box className="grid grid-cols-3 grid-rows-2 gap-y-5 gap-x-3">
-                        {valueOfMoney.map((data) => (<Button style={{background: "#E0E0E0", borderRadius: "15px", color:"black"}} className="py-2" value={data} onClick={() => {
+                        {valueOfMoney.map((data,index) => (<Button key={`${index}-button-money`} style={{background: "#E0E0E0", borderRadius: "15px", color:"black"}} className="py-2" value={data} onClick={() => {
                             setValue("amount", data);
                         }}>{data.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}</Button>))}
                     </Box>

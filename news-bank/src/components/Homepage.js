@@ -1,6 +1,5 @@
 import React from 'react';
 //import HomepageCP from './Homepage/HomepageCP';
-import InterTransfer from './FundTransfer/InterTransfer/InterTransfer';
 //import FundTransfer from './FundTransfer/FundTransfer';
 import Sidebar from './SideBar';
 import Navbar from './NavBar';
