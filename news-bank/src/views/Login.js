@@ -37,11 +37,7 @@ export default function Login(props) {
             if (res.status === 200) {
                 console.log(res);
                 localStorage.token = res.data.data.token;
-
-
-                const obj = parseJwt(res.data.data.token);
-                console.log(obj);
-                localStorage.userId = obj.id;
+                localStorage.refreshToken = res.data.data.refreshToken;
 
                 // console.log(location.state);
                 const retUrl = location.state?.from?.pathname || '/';

@@ -21,7 +21,7 @@ export default function QuickUtility() {
                             <Button className="flex flex-grow">
                                 <Box className="flex flex-row flex-grow justify-between px-2">
                                     <img src={TransferWithinBank} alt='TransferWithinBank'/>
-                                    <button onClick={() => {nagivate('/transfer/internal')}}>
+                                    <button onClick={() => {nagivate('/transfer')}}>
                                         <Typography className='text-black text-left self-center' style={{textTransform: 'none'}}>Transfer Within Bank</Typography>
                                     </button>
                                     <img src={RightArrow} alt='RightArrow'/>

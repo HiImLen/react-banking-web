@@ -5,6 +5,10 @@ import Login from './views/Login.js';
 import SignUp from './views/SignUp.js';
 import Forgot from './views/Forgot.js';
 import OTPVerify from './components/FundTransfer/OTPVerify.js';
+import InternalTransfer from './components/FundTransfer/InternalTransfer.js';
+import { parseJwt } from './utils.js';
+import { useEffect } from 'react';
+import HomepageCP from './components/Homepage/HomepageCP.js';
 
 const theme = createTheme({
   palette:{
@@ -28,6 +32,9 @@ const theme = createTheme({
 
 
 const App = () => {
+  useEffect(() => {
+
+  });
   return (
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -37,20 +44,22 @@ const App = () => {
             <RequireAuth>
               <Homepage />
             </RequireAuth>
-          } />
-          <Route path="/otpVerify" element={
-            <RequireAuth>
-              <OTPVerify />
-            </RequireAuth>
-          }/>
+          }>
+            <Route index element={<HomepageCP/>}/>
+            <Route exact path="transfer" element={<InternalTransfer />} />
+            <Route exact path='otpVerify' element={<OTPVerify />} />
+          </Route>
         </Routes>
-    
   )
 }
 
 const RequireAuth = ({ children }) => {
 
   const location = useLocation();
+
+
+  const decode = parseJwt(localStorage.token);
+  console.log(decode);
 
   if (!localStorage.token) {
     return <Navigate to={'/login'} state={{ from: location }} />
