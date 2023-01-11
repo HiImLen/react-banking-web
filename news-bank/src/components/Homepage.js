@@ -1,12 +1,10 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-//import HomepageCP from './Homepage/HomepageCP';
-//import FundTransfer from './FundTransfer/FundTransfer';
 import Sidebar from './SideBar';
 import Navbar from './NavBar';
 import QuickUtility from './QuickUtility';
-import { Outlet } from 'react-router';
 
-export default function Homepage() {
+export default function Homepage({child}) {
     return (
         <div className='h-screen grid grid-cols-5 gap-x-5'>
             <Sidebar/>
@@ -14,7 +12,7 @@ export default function Homepage() {
                 <Navbar/>
                 <div className='row-span-5 grid grid-cols-7 gap-x-5 mx-3'>
                     <div className='col-span-5'>
-                        <Outlet /> 
+                        {child}
                     </div>
                     <div className='col-span-2'>
                         <QuickUtility/>

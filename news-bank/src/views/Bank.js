@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useReducer } from 'react';
+import { Outlet } from 'react-router';
 import AppContext from '../AppContext.js';
 import reducer, { initializer } from '../AppReducer.js';
 import Homepage from '../components/Homepage.js';
@@ -15,7 +16,7 @@ const Bank = () => {
     return (
         <div>
             <AppContext.Provider value={{ store, dispatch }}>
-                <Homepage />
+                <Homepage child={<Outlet />} />
             </AppContext.Provider>
         </div>
     )

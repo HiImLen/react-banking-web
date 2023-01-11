@@ -35,7 +35,7 @@ export default function InternalTransfer() {
   console.log(errors);
   
   return (
-    <div className='grid grid-cols-5'>
+    <div className='grid grid-cols-5 mb-10'>
         <div/>
         <div className='col-span-3 flex flex-col'>
             <Paper 

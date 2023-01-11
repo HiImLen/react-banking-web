@@ -10,7 +10,7 @@ import InternalTransfer from './components/FundTransfer/InternalTransfer.js';
 import { parseJwt } from './utils.js';
 import { useEffect } from 'react';
 import HomepageCP from './components/Homepage/HomepageCP.js';
-import Homepage from './components/Homepage.js';
+import Bank from './views/Bank.js';
 
 // const theme = createTheme({
 //   palette:{
@@ -44,10 +44,10 @@ const App = () => {
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/" element={
             <RequireAuth>
-              <Homepage />
+              <Bank />
             </RequireAuth>
           }>
-            <Route index element={<HomepageCP/>}/>
+            <Route index element={<HomepageCP/>} />
             <Route exact path="transfer" element={<InternalTransfer />} />
             <Route exact path='otpVerify' element={<OTPVerify />} />
           </Route>
