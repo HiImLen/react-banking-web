@@ -1,9 +1,10 @@
+import React  from 'react';
 import { Button, Paper, Typography } from "@mui/material";
 import WithinBank from '../../assets/icon/FundTransfer/WithinBank.svg';
 import InterTransfer from '../../assets/icon/FundTransfer/InterTransfer.svg';
 
 
-export default function FundTransfer(props) {
+export default function FundTransfer() {
     return(
         <Paper 
             className='grid grid-cols-3 justify-items-center content-center py-3 px-5' 

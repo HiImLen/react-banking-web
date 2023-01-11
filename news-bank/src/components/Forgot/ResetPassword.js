@@ -1,7 +1,7 @@
-import { set, useForm } from 'react-hook-form';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { instance, parseJwt } from '../../utils.js';
+/* eslint-disable react/prop-types */
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { instance } from '../../utils.js';
 
 export default function ResetPassword(props) {
     const { register, handleSubmit, setError, formState: { errors } } = useForm();
@@ -50,7 +50,7 @@ export default function ResetPassword(props) {
             <div className="text-center">
                 <h4 className="text-dark mb-3">Forgot Your Password?</h4>
                 <p>We get it, stuff happens!</p>
-                <p className="mb-4">Just enter your username and we'll send you an OTP to your email to reset your password!</p>
+                <p className="mb-4">Just enter your username and we will send you an OTP to your email to reset your password!</p>
             </div>
             <form className="user" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-3">

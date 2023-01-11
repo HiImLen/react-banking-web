@@ -1,8 +1,9 @@
+import React from 'react';
 import { Box, Paper, Typography } from "@mui/material";
 import BankLogo from '../assets/img/BankLogo.svg';
 
 
-export default function SideBar(props) {
+export default function SideBar() {
     return(
         <Paper className="flex flex-col" square elevation={2}>
             <div className="flex flex-row justify-center space-x-2 py-3">

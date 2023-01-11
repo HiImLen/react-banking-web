@@ -1,6 +1,5 @@
-import { inputClasses } from '@mui/material';
 import axios from 'axios';
-import { Navigate, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 const instance = axios.create({
   baseURL: 'http://localhost:3030/',

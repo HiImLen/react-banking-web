@@ -1,6 +1,7 @@
-import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import { createTheme, ThemeProvider } from '@mui/material';
-import Homepage from './components/Homepage.js';
+/* eslint-disable react/prop-types */
+import React  from 'react';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+//import { createTheme } from '@mui/material';
 import Login from './views/Login.js';
 import SignUp from './views/SignUp.js';
 import Forgot from './views/Forgot.js';
@@ -9,26 +10,27 @@ import InternalTransfer from './components/FundTransfer/InternalTransfer.js';
 import { parseJwt } from './utils.js';
 import { useEffect } from 'react';
 import HomepageCP from './components/Homepage/HomepageCP.js';
+import Homepage from './components/Homepage.js';
 
-const theme = createTheme({
-  palette:{
-    primary:{
-      main: '#4D54E4',
-      secondary:'#22343D',
-    },
-    overrides: {
-      MuiButton: {
-        raisedPrimary: {
-          color: 'white',
-        },
-      },
-    },
-    text:{
-      primary:'#000000',
-      secondary: '#4D54E4',
-    },
-  },
-})
+// const theme = createTheme({
+//   palette:{
+//     primary:{
+//       main: '#4D54E4',
+//       secondary:'#22343D',
+//     },
+//     overrides: {
+//       MuiButton: {
+//         raisedPrimary: {
+//           color: 'white',
+//         },
+//       },
+//     },
+//     text:{
+//       primary:'#000000',
+//       secondary: '#4D54E4',
+//     },
+//   },
+// })
 
 
 const App = () => {

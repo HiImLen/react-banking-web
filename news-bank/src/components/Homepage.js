@@ -1,14 +1,12 @@
 import React from 'react';
-import HomepageCP from './Homepage/HomepageCP';
-import InterTransfer from './FundTransfer/InterTransfer/InterTransfer';
-import FundTransfer from './FundTransfer/FundTransfer';
+//import HomepageCP from './Homepage/HomepageCP';
+//import FundTransfer from './FundTransfer/FundTransfer';
 import Sidebar from './SideBar';
 import Navbar from './NavBar';
 import QuickUtility from './QuickUtility';
-import InternalTransfer from './FundTransfer/InternalTransfer';
 import { Outlet } from 'react-router';
 
-export default function Homepage(props) {
+export default function Homepage() {
     return (
         <div className='h-screen grid grid-cols-5 gap-x-5'>
             <Sidebar/>

@@ -1,8 +1,9 @@
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { instance, parseJwt } from '../../utils.js';
+import { instance } from '../../utils.js';
 
-export default function VerifyOTP(props) {
+export default function VerifyOTP() {
     const nagivate = useNavigate();
     const location = useLocation();
     const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm();
