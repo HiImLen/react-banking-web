@@ -103,10 +103,6 @@ export default function SignUp () {
             <div className="card shadow-lg o-hidden border-0 my-5">
                 <div className="card-body p-0">
                     <div className="row">
-                        <div className="col-lg-5 d-none d-lg-flex">
-                            <div className="flex-grow-1 bg-register-image" style={{ backgroundImage: 'url(' + signUpImg + ')' }} />
-                        </div>
-                        <div className="col-lg-7">
                             <div className="p-5">
                                 <div className="text-center">
                                     <h4 className="text-dark mb-4">Create an Account!</h4>
@@ -144,7 +140,6 @@ export default function SignUp () {
                                     <button className="btn btn-primary d-block btn-user w-100" type="submit" onClick={onReset}>Register Account</button>
                                 </form>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>

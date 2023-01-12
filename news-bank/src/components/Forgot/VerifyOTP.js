@@ -1,9 +1,10 @@
+/* eslint-disable*/
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { instance } from '../../utils.js'
 
-export default function VerifyOTP () {
+export default function VerifyOTP (props) {
   const nagivate = useNavigate()
   const location = useLocation()
   const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm()
@@ -47,6 +48,10 @@ export default function VerifyOTP () {
         console.log(error.response.headers)
         // alert(JSON.stringify(error.response.data.message));
         setError('error', { type: 'manual', message: error.response.data.message })
+        // check status = "expired"
+        if (error.response.data.status === 'expired') {
+          props.onExpiredOTP()
+        }
       } else if (error.request) {
         // The request was made but no response was received
         // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -70,7 +75,8 @@ export default function VerifyOTP () {
         <div className="container">
             <div className="text-center">
                 <h4 className="text-dark mb-3">Forgot Your Password?</h4>
-                <p className="mb-4">An OTP has been sent to your email!</p>
+                <p className="mb-2">An OTP has been sent to your email!</p>
+                <p className="mb-4">{props.email}</p>
             </div>
             <form className="user" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-3">

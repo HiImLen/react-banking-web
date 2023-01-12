@@ -15,7 +15,8 @@ export default function ResetPassword (props) {
       console.log(data)
       const res = await instance.post('/Users/ResetPassword', data)
       if (res.status === 200) {
-        alert('Please check your email for the reset password OTP.')
+        // alert('Please check your email for the reset password OTP.')
+        props.onSetEmail(res.data.email)
         props.onResetPassword(true)
 
         // const retUrl = location.state?.from?.pathname || '/';

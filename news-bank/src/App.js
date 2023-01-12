@@ -45,7 +45,6 @@ const App = () => {
 
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/" element={
             <RequireAuth>
@@ -60,6 +59,7 @@ const App = () => {
             <Route exact path="debt/debtReminderManagement" element={<DebtReminderManagement />} />
             <Route path='transaction/:id/otpVerify' element={<OTPVerify />} />
             <Route path='transaction/:id/:status' element={<Transaction/>}/>
+            <Route path="signup" element={<SignUp />} />
           </Route>
         </Routes>
     </ThemeProvider>

@@ -1,3 +1,4 @@
+/* eslint-disable*/
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -10,10 +11,15 @@ export default function Forgot () {
   // const location = useLocation();
 
   const [isReset, setIsReset] = useState(false)
+  const [email, setEmail] = useState('')
 
   useEffect(() => {
     LoggedIn()
   })
+
+  const onSetEmail = (email) => {
+    setEmail(email)
+  }
 
   const onResetPassword = () => {
     setIsReset(true)
@@ -41,7 +47,7 @@ export default function Forgot () {
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="p-5">
-                                        {isReset ? <VerifyOTP onExpiredOTP={onExpiredOTP} /> : <ResetPassword onResetPassword={onResetPassword} />}
+                                        {isReset ? <VerifyOTP onExpiredOTP={onExpiredOTP} email={email} /> : <ResetPassword onResetPassword={onResetPassword} onSetEmail={onSetEmail} />}
                                         <hr />
                                         <div className="text-center small"><Link to ="/login">Already have an account? Login!</Link></div>
                                     </div>
