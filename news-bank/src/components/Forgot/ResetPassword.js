@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable*/
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { instance } from '../../utils.js'
@@ -15,7 +15,7 @@ export default function ResetPassword (props) {
       console.log(data)
       const res = await instance.post('/Users/ResetPassword', data)
       if (res.status === 200) {
-        alert('Please check your email for the reset password OTP.')
+        // alert('Please check your email for the reset password OTP.')
         props.onResetPassword(true)
 
         // const retUrl = location.state?.from?.pathname || '/';
