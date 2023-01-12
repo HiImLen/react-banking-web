@@ -1,3 +1,4 @@
+/* eslint-disable*/
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -49,7 +50,7 @@ export default function VerifyOTP (props) {
         setError('error', { type: 'manual', message: error.response.data.message })
         // check status = "expired"
         if (error.response.data.status === 'expired') {
-          props.onExpiredOTP();
+          props.onExpiredOTP()
         }
       } else if (error.request) {
         // The request was made but no response was received
