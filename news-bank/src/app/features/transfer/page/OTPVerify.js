@@ -1,8 +1,8 @@
 import { Button, Typography } from '@mui/material'
 import React from 'react'
-import OtpInput from 'react-otp-input'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import OtpInput from 'react18-input-otp'
 import { parseJwt } from '../../../../utils.js'
 import { setOTP, verifyOTP } from '../store/transferSlice.js'
 
