@@ -1,6 +1,5 @@
 import { Box, Button, Paper, Typography } from '@mui/material'
 import React from 'react'
-import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import RightArrow from '../assets/icon/RightArrow.svg'
 import InterbankTransfer from '../assets/img/Quick utility/InterbankTransfer.svg'
@@ -8,7 +7,6 @@ import RecentTransaction from '../assets/img/Quick utility/RecentTransaction.svg
 import TransferWithinBank from '../assets/img/Quick utility/TransferWithinBank.svg'
 
 export default function QuickUtility () {
-  const nagivate = useNavigate()
   return (
         // gồm 3 button chức năng
         <div className="grid grid-rows-5">
@@ -24,9 +22,7 @@ export default function QuickUtility () {
                                 <Button className="flex flex-grow">
                                     <Box className="flex flex-row flex-grow justify-between px-2">
                                         <img src={TransferWithinBank} alt='TransferWithinBank'/>
-                                        <button onClick={() => { nagivate('/transfer') }}>
-                                            <Typography className='text-black text-left self-center' style={{ textTransform: 'none' }}>Transfer Within Bank</Typography>
-                                        </button>
+                                        <Typography className='text-black text-left self-center' style={{ textTransform: 'none' }}>Transfer Within Bank</Typography>
                                         <img src={RightArrow} alt='RightArrow'/>
                                     </Box>
                                 </Button>

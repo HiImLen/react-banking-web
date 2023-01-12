@@ -8,6 +8,7 @@ import Transaction from './app/features/transfer/page/Transaction.js'
 import HomepageCP from './components/Homepage/HomepageCP.js'
 import FundTransfer from './app/features/transfer/page/FundTransfer.js'
 import DebtReminder from './app/features/debit/page/DebtReminder.js'
+import DebtReminderManagement from './app/features/debit/page/DebtReminderManagement.js'
 import CreateDebt from './app/features/debit/page/CreateDebt.js'
 import Bank from './views/Bank.js'
 import Forgot from './views/Forgot.js'
@@ -53,8 +54,9 @@ const App = () => {
             <Route exact path="transfer/inter" element={<InternalTransfer />} />
             <Route path="debt" element={<DebtReminder />} />
             <Route exact path="debt/createDebtReminder" element={<CreateDebt />} />
+            <Route exact path="debt/debtReminderManagement" element={<DebtReminderManagement />} />
             <Route path='transaction/:id/otpVerify' element={<OTPVerify />} />
-            <Route path="transaction/:id/:status" element={<Transaction/>}/>
+            <Route path='transaction/:id/:status' element={<Transaction/>}/>
           </Route>
         </Routes>
   )
