@@ -1,22 +1,23 @@
 import { Button, Typography } from '@mui/material'
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import OtpInput from 'react18-input-otp'
 import { parseJwt } from '../../../../utils.js'
-import { setOTP, verifyOTP } from '../store/transferSlice.js'
+import { setTargetTransactionId, verifyOTP } from '../store/transferSlice.js'
 
 export default function OTPVerify () {
-  // const { register, handleSubmit, formState: { errors } } = useForm();
-  // const onSubmit = data => console.log(data);
-  // console.log(errors);
-  // const [otp = { otp: '' };
+  const [otp, setOtp] = useState('')
   const currentUser = parseJwt(localStorage.token)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const otp = useSelector((state) => state.transfer.otp)
+  const { id } = useParams()
+  useEffect(() => {
+    dispatch(setTargetTransactionId(id))
+  }, [])
 
-  const handleChange = (otp) => { setOTP(otp) }
+  const handleChange = (otp) => { setOtp(otp) }
 
   return (
       <div className='flex flex-col items-center justify-center space-y-5'>
@@ -38,7 +39,7 @@ export default function OTPVerify () {
           <Link className='text-black font-semibold'>Resend OTP</Link>
         </div>
         <Button className="mx-5 w-48"variant="contained" color='primary' onClick={async () => {
-          dispatch(verifyOTP({ navigate }))
+          dispatch(verifyOTP({ otp, navigate }))
         }} sx={{
           borderRadius: '10px',
           background: '#4D54E4',

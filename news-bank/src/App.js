@@ -53,8 +53,8 @@ const App = () => {
             <Route exact path="transfer/inter" element={<InternalTransfer />} />
             <Route path="debt" element={<DebtReminder />} />
             <Route exact path="debt/createDebtReminder" element={<CreateDebt />} />
-            <Route exact path='otpVerify' element={<OTPVerify />} />
-            <Route path="transaction/:status" element={<Transaction/>}/>
+            <Route path='transaction/:id/otpVerify' element={<OTPVerify />} />
+            <Route path="transaction/:id/:status" element={<Transaction/>}/>
           </Route>
         </Routes>
   )

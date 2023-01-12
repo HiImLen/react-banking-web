@@ -46,7 +46,7 @@ export default function InternalTransfer () {
             >
                 <img src={avt} alt='avatar'/>
                 <div className='flex flex-col justify-center'>
-                    <Typography className='text-black text-left'>{sourceAccount.number}</Typography>
+                    <Typography className='text-black text-left'>{sourceAccount?.number}</Typography>
                     <Typography className='text-black text-left' style={{ fontWeight: 600 }}>{sourceAccount?.balance?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</Typography>
 
                 </div>
@@ -60,9 +60,9 @@ export default function InternalTransfer () {
                         }}/>
                         {errors.destination_account_number && <p className='text-red-500'>{errors.destination_account_number.message}</p>}
                     </div>
-                    {destinationAccount !== {}
+                    {destinationAccount
                       ? (
-                            <TextField className='border-sky-500 border-2' id="outlined-basic" placeholder="The recipient name"variant="outlined" value={destinationAccount.name} disabled/>
+                            <TextField className='border-sky-500 border-2' id="outlined-basic" placeholder="The recipient name"variant="outlined" value={destinationAccount?.username} disabled/>
                         )
                       : (<></>)}
                     <FormControl>

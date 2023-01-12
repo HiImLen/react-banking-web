@@ -2,10 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { instance } from '../../../../utils'
 
 const initialState = {
-  sourceAccount: {},
-  destinationAccount: {},
-  otp: '',
-  status: true
+  sourceAccount: null,
+  destinationAccount: null,
+  status: true,
+  targetTransactionId: null,
+  transaction: null
 }
 
 export const getSourceAccount = createAsyncThunk(
@@ -28,8 +29,9 @@ export const getDestinationAccount = createAsyncThunk(
   async ({ accountNumber }, { dispatch, getState }) => {
     try {
       const res = await instance.get(`/Accounts/${accountNumber}/Internal`)
+      console.log('getDestinationAccount', res)
       if (res.status === 200 && res.data.status === 'success') {
-        setDestinationAccount(res.data.data)
+        dispatch(setDestinationAccount(res.data.data))
       }
     } catch (err) {
       console.log(err)
@@ -50,7 +52,7 @@ export const createTransaction = createAsyncThunk(
       const res = await instance.post('/Transactions', transactionData)
       console.log(res)
       if (res.data.status === 'success') {
-        navigate('/otpVerify')
+        navigate(`/transaction/${res.data.data.id}/otpVerify`)
       }
     } catch (err) {
       console.log(err)
@@ -60,15 +62,28 @@ export const createTransaction = createAsyncThunk(
 
 export const verifyOTP = createAsyncThunk(
   'transfer/verifyOTP',
-  async ({ navigate }, { dispatch, getState }) => {
+  async ({ otp, navigate }, { dispatch, getState }) => {
     try {
-      const { otp } = getState().transfer
+      const { targetTransactionId } = getState().transfer
       const res = await instance.post('/Transactions/VerifyOTP', {
         otp
       })
-      if ((res.status === 200 || res.status === 201) && res.data.status === 'success') { navigate('/transaction/success') } else navigate('/transaction/fail')
+      if ((res.status === 200 || res.status === 201) && res.data.status === 'success') { dispatch(setStatus(true)); navigate(`/transaction/${targetTransactionId}/success`) } else { dispatch(false); navigate(`/transaction/${targetTransactionId}/fail`) }
     } catch (err) {
 
+    }
+  }
+)
+
+export const getTransaction = createAsyncThunk(
+  'transfer/getTransaction',
+  async ({ id }, { dispatch, getState }) => {
+    try {
+      const res = await instance.get(`/Transactions/GetById/${id}`)
+      console.log(res)
+      if (res.status === 200 && res.data.status === 'success') { dispatch(setTransaction(res.data.data)) }
+    } catch (err) {
+      console.log(err)
     }
   }
 )
@@ -83,14 +98,17 @@ export const transferSlice = createSlice({
     setDestinationAccount: (state, action) => {
       state.destinationAccount = action.payload
     },
-    setOTP: (state, action) => {
-      state.otp = action.payload
-    },
     setStatus: (state, action) => {
       state.status = action.payload
+    },
+    setTargetTransactionId: (state, action) => {
+      state.targetTransactionId = action.payload
+    },
+    setTransaction: (state, action) => {
+      state.transaction = action.payload
     }
   }
 })
 
-export const { setSourceAccount, setDestinationAccount, setOTP } = transferSlice.actions
+export const { setSourceAccount, setDestinationAccount, setStatus, setTargetTransactionId, setTransaction } = transferSlice.actions
 export default transferSlice.reducer

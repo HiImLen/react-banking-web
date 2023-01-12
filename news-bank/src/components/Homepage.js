@@ -6,7 +6,7 @@ import Sidebar from './SideBar'
 
 export default function Homepage ({ child }) {
   return (
-        <div className='h-screen grid grid-cols-5 gap-x-5'>
+        <div className='h-screen grid grid-cols-5 gap-x-5' style={{ background: '#F8F9FD' }}>
             <Sidebar/>
             <div className='col-span-4 grid grid-rows-6 '>
                 <Navbar/>
