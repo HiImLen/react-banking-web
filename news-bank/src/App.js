@@ -14,32 +14,35 @@ import Bank from './views/Bank.js'
 import Forgot from './views/Forgot.js'
 import Login from './views/Login.js'
 import SignUp from './views/SignUp.js'
+import { createTheme, ThemeProvider } from '@mui/material'
 
-// const theme = createTheme({
-//   palette:{
-//     primary:{
-//       main: '#4D54E4',
-//       secondary:'#22343D',
-//     },
-//     overrides: {
-//       MuiButton: {
-//         raisedPrimary: {
-//           color: 'white',
-//         },
-//       },
-//     },
-//     text:{
-//       primary:'#000000',
-//       secondary: '#4D54E4',
-//     },
-//   },
-// })
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#4D54E4',
+      secondary: '#22343D'
+    },
+    overrides: {
+      MuiButton: {
+        raisedPrimary: {
+          color: 'white'
+        }
+      }
+    },
+    text: {
+      primary: '#000000',
+      secondary: '#4D54E4'
+    }
+  }
+})
 
 const App = () => {
   useEffect(() => {
 
   })
   return (
+    <ThemeProvider theme={theme}>
+
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
@@ -59,6 +62,7 @@ const App = () => {
             <Route path='transaction/:id/:status' element={<Transaction/>}/>
           </Route>
         </Routes>
+    </ThemeProvider>
   )
 }
 
