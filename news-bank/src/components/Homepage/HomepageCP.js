@@ -1,5 +1,6 @@
 import { Box, Button, Paper, Typography } from '@mui/material'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import DebtReminder from '../../assets/icon/DebtReminder.svg'
 import FundTransfer from '../../assets/icon/FundTransfer.svg'
 import RecentTrans from '../../assets/icon/RecentTrans.svg'
@@ -72,22 +73,26 @@ export default function HomepageCP () {
                 elevation={2}
                 sx={{ borderRadius: '10px' }}
             >
-                <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
-                    <Button className="flex flex-grow">
-                        <div className="flex flex-grow flex-col items-center gap-y-2">
-                            <div style={{ height: '59px', width: '59px' }}><img src={FundTransfer} alt='FundTransfer'/></div>
-                            <Typography className='text-black' style={{ textTransform: 'none' }}>Fund Transfer</Typography>
-                        </div>
-                    </Button>
-                </div>
-                <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
-                    <Button className="flex flex-grow">
-                        <div className="flex flex-grow flex-col items-center gap-y-2">
-                            <div style={{ height: '59px', width: '59px' }}><img src={DebtReminder} alt='DebtReminder'/></div>
-                            <Typography className='text-black' style={{ textTransform: 'none' }}>Debt Reminder Management</Typography>
-                        </div>
-                    </Button>
-                </div>
+                <Link to='transfer' style={{ textDecoration: 'none' }}>
+                    <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
+                        <Button className="flex flex-grow">
+                                <div className="flex flex-grow flex-col items-center gap-y-2">
+                                    <div style={{ height: '59px', width: '59px' }}><img src={FundTransfer} alt='FundTransfer'/></div>
+                                    <Typography className='text-black' style={{ textTransform: 'none' }}>Fund Transfer</Typography>
+                                </div>
+                        </Button>
+                    </div>
+                </Link>
+                <Link to='debt' style={{ textDecoration: 'none' }}>
+                    <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
+                        <Button className="flex flex-grow">
+                            <div className="flex flex-grow flex-col items-center gap-y-2">
+                                <div style={{ height: '59px', width: '59px' }}><img src={DebtReminder} alt='DebtReminder'/></div>
+                                <Typography className='text-black' style={{ textTransform: 'none' }}>Debt Reminder Management</Typography>
+                            </div>
+                        </Button>
+                    </div>
+                </Link>
                 <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
                     <Button className="flex flex-grow">
                         <div className="flex flex-grow flex-col items-center gap-y-2">
