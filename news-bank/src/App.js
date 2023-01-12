@@ -47,8 +47,8 @@ const App = () => {
           }>
             <Route index element={<HomepageCP/>} />
             <Route exact path="transfer" element={<InternalTransfer />} />
-            <Route exact path='otpVerify' element={<OTPVerify />} />
-            <Route path="transaction/:status" element={<Transaction/>}/>
+            <Route path='transaction/:id/otpVerify' element={<OTPVerify />} />
+            <Route path="transaction/:id/:status" element={<Transaction/>}/>
           </Route>
         </Routes>
   )
