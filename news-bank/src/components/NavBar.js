@@ -1,44 +1,42 @@
-import React from 'react';
-import { Typography } from '@mui/material';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import avt from '../assets/img/avt.svg';
-import signout from '../assets/img/signout.svg';
-import DownArrow from '../assets/icon/DownArrow.svg';
-import notification from '../assets/icon/notification.svg';
+import { Typography } from '@mui/material'
+import Button from '@mui/material/Button'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import DownArrow from '../assets/icon/DownArrow.svg'
+import notification from '../assets/icon/notification.svg'
+import avt from '../assets/img/avt.svg'
+import signout from '../assets/img/signout.svg'
 
+export default function NavBar () {
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [anchorEl2, setAnchorEl2] = useState(null)
+  const open = Boolean(anchorEl)
+  const open2 = Boolean(anchorEl2)
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClick2 = (event) => {
+    setAnchorEl2(event.currentTarget)
+  }
+  const nagivate = useNavigate()
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+  const handleClose2 = () => {
+    setAnchorEl2(null)
+  }
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('userId')
+    nagivate('/login')
+    handleClose()
+  }
 
-export default function NavBar() {
-    const [anchorEl, setAnchorEl] = useState(null);
-    const [anchorEl2, setAnchorEl2] = useState(null);
-    const open = Boolean(anchorEl);
-    const open2 = Boolean(anchorEl2);
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-    const handleClick2 = (event) => {
-      setAnchorEl2(event.currentTarget);
-    };
-    const nagivate = useNavigate();
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-    const handleClose2 = () => {
-      setAnchorEl2(null);
-    };
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userId');
-        nagivate('/login');
-        handleClose();
-    }
-  
-    return (
+  return (
       <div className="flex flex-row justify-between items-center">
-        <Typography className='text-black' style={{fontWeight:600}}>Home</Typography>
+        <Typography className='text-black' style={{ fontWeight: 600 }}>Home</Typography>
         {/* user menu */}
         <div className='flex flex-row justify-center items-center space-x-1'>
           <Button
@@ -52,7 +50,7 @@ export default function NavBar() {
 
           </Button>
           <img src={avt} alt='avatar'/>
-          <Typography className='text-black' style={{fontWeight:600}}>DO TIEN TRUNG</Typography>
+          <Typography className='text-black' style={{ fontWeight: 600 }}>DO TIEN TRUNG</Typography>
           <Button
             id="basic-button"
             aria-controls={open ? 'basic-menu' : undefined}
@@ -69,20 +67,20 @@ export default function NavBar() {
           open={open}
           onClose={handleClose}
           MenuListProps={{
-            'aria-labelledby': 'basic-button',
+            'aria-labelledby': 'basic-button'
           }}
           anchorOrigin={{
             vertical: 'bottom',
-            horizontal: 'right',
+            horizontal: 'right'
           }}
           transformOrigin={{
             vertical: 'top',
-            horizontal: 'right',
+            horizontal: 'right'
           }}
         >
           <MenuItem className='flex flex-row justify-center space-x-1' onClick={handleLogout}>
             <img src={signout} alt='signout'/>
-            <Typography style={{fontWeight:600}}>Sign out</Typography>
+            <Typography style={{ fontWeight: 600 }}>Sign out</Typography>
           </MenuItem>
         </Menu>
         <Menu
@@ -91,21 +89,21 @@ export default function NavBar() {
           open={open2}
           onClose={handleClose2}
           MenuListProps={{
-            'aria-labelledby': 'basic-button',
+            'aria-labelledby': 'basic-button'
           }}
           anchorOrigin={{
             vertical: 'bottom',
-            horizontal: 'right',
+            horizontal: 'right'
           }}
           transformOrigin={{
             vertical: 'top',
-            horizontal: 'right',
+            horizontal: 'right'
           }}
         >
           <MenuItem className='flex flex-row justify-center space-x-1' >
-            <Typography style={{fontWeight:600}}>Something...</Typography>
+            <Typography style={{ fontWeight: 600 }}>Something...</Typography>
           </MenuItem>
         </Menu>
       </div>
-    );
+  )
 }

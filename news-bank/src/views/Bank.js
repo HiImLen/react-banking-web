@@ -1,25 +1,25 @@
-import React from 'react';
-import { useEffect, useReducer } from 'react';
-import { Outlet } from 'react-router';
-import AppContext from '../AppContext.js';
-import reducer, { initializer } from '../AppReducer.js';
-import Homepage from '../components/Homepage.js';
-//import { instance } from '../utils.js';
+import React, { useEffect, useReducer } from 'react'
+
+import { Outlet } from 'react-router'
+import AppContext from '../AppContext.js'
+import reducer, { initializer } from '../AppReducer.js'
+import Homepage from '../components/Homepage.js'
+// import { instance } from '../utils.js';
 
 const Bank = () => {
-    const [store, dispatch] = useReducer(reducer, {}, initializer);
+  const [store, dispatch] = useReducer(reducer, {}, initializer)
 
-    useEffect(() => {
+  useEffect(() => {
 
-    }, []);
+  }, [])
 
-    return (
+  return (
         <div>
             <AppContext.Provider value={{ store, dispatch }}>
                 <Homepage child={<Outlet />} />
             </AppContext.Provider>
         </div>
-    )
+  )
 }
 
 export default Bank

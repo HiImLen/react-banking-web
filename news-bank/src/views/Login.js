@@ -1,95 +1,95 @@
-import React from 'react';
-import ReCAPTCHA from "react-google-recaptcha";
-import { useForm } from 'react-hook-form';
-import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import img_login from '../assets/img/login-img.jpeg';
-import { instance } from '../utils.js';
+import React, { useEffect, useState } from 'react'
+import ReCAPTCHA from 'react-google-recaptcha'
+import { useForm } from 'react-hook-form'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-export default function Login() {
-    const nagivate = useNavigate();
-    const location = useLocation();
+import imgLogin from '../assets/img/login-img.jpeg'
+import { instance } from '../utils.js'
 
-    const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm();
-    const [capValue, setCapValue] = useState("");
+export default function Login () {
+  const nagivate = useNavigate()
+  const location = useLocation()
 
-    useEffect(() => {
-        LoggedIn();
-    });
+  const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm()
+  const [capValue, setCapValue] = useState('')
 
-    const onSubmit = async (data) => {
-        console.log("submit");
-        if (!capValue) {
-            //alert('Please verify that you are not a robot.');
-            setError('captcha', { type: 'manual', message: 'Please verify that you are not a robot.' });
-        }
-        if (!data.username) {
-            setError('username', { type: 'manual', message: 'Username cannot be empty.' });
-        }
-        if (!data.password) {
-            setError('password', { type: 'manual', message: 'Password cannot be empty.' });
-        }
-        if (!data.username || !data.password || !capValue) {
-            return;
-        }
-        try {
-            console.log(data);
-            const res = await instance.post('/Users/Login', data);
-            if (res.status === 200) {
-                console.log(res);
-                localStorage.token = res.data.data.token;
-                localStorage.refreshToken = res.data.data.refreshToken;
+  useEffect(() => {
+    LoggedIn()
+  })
 
-                // console.log(location.state);
-                const retUrl = location.state?.from?.pathname || '/';
-                nagivate(retUrl);
-            }
-        } catch (error) {
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
-                setError('login', { type: 'manual', message: error.response.data.message });
-                //alert(JSON.stringify(error.response.data.message));
-            } else if (error.request) {
-                // The request was made but no response was received
-                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                // http.ClientRequest in node.js
-                console.log(error.request);
-                setError('login', { type: 'manual', message: 'Cannot login right now.' });
-                //alert('Cannot login right now.');
-            } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
-            }
-            console.log(error.config);
-        }
+  const onSubmit = async (data) => {
+    console.log('submit')
+    if (!capValue) {
+      // alert('Please verify that you are not a robot.');
+      setError('captcha', { type: 'manual', message: 'Please verify that you are not a robot.' })
     }
-
-    const onChange = (value) => {
-        setCapValue(value);
-        clearErrors('captcha');
-        //console.log("Captcha value:", capValue);
+    if (!data.username) {
+      setError('username', { type: 'manual', message: 'Username cannot be empty.' })
     }
-
-    const onReset = () => {
-        if (capValue) {
-            clearErrors(['captcha', 'login']);    
-        } else {
-            setCapValue("");
-            clearErrors(['captcha', 'login']);
-        }
-      };
-
-    const LoggedIn = () => {
-        if (localStorage.token) {
-            nagivate('/');
-        }
+    if (!data.password) {
+      setError('password', { type: 'manual', message: 'Password cannot be empty.' })
     }
+    if (!data.username || !data.password || !capValue) {
+      return
+    }
+    try {
+      console.log(data)
+      const res = await instance.post('/Users/Login', data)
+      if (res.status === 200) {
+        console.log(res)
+        localStorage.token = res.data.data.token
+        localStorage.refreshToken = res.data.data.refreshToken
 
-    return (
+        // console.log(location.state);
+        const retUrl = location.state?.from?.pathname || '/'
+        nagivate(retUrl)
+      }
+    } catch (error) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log(error.response.data)
+        console.log(error.response.status)
+        console.log(error.response.headers)
+        setError('login', { type: 'manual', message: error.response.data.message })
+        // alert(JSON.stringify(error.response.data.message));
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.log(error.request)
+        setError('login', { type: 'manual', message: 'Cannot login right now.' })
+        // alert('Cannot login right now.');
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error', error.message)
+      }
+      console.log(error.config)
+    }
+  }
+
+  const onChange = (value) => {
+    setCapValue(value)
+    clearErrors('captcha')
+    // console.log("Captcha value:", capValue);
+  }
+
+  const onReset = () => {
+    if (capValue) {
+      clearErrors(['captcha', 'login'])
+    } else {
+      setCapValue('')
+      clearErrors(['captcha', 'login'])
+    }
+  }
+
+  const LoggedIn = () => {
+    if (localStorage.token) {
+      nagivate('/')
+    }
+  }
+
+  return (
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-md-9 col-lg-12 col-xl-10">
@@ -97,7 +97,7 @@ export default function Login() {
                         <div className="card-body p-0">
                             <div className="row">
                                 <div className="col-lg-6 d-none d-lg-flex">
-                                    <div className="flex-grow-1 bg-login-image" style={{ backgroundImage: "url(" + img_login + ")" }} />
+                                    <div className="flex-grow-1 bg-login-image" style={{ backgroundImage: 'url(' + imgLogin + ')' }} />
                                 </div>
                                 <div className="col-lg-6">
                                     <div className="p-5">
@@ -143,5 +143,5 @@ export default function Login() {
                 </div>
             </div>
         </div>
-    );
+  )
 }

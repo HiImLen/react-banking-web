@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
-import Sidebar from './SideBar';
-import Navbar from './NavBar';
-import QuickUtility from './QuickUtility';
+import React from 'react'
+import Navbar from './NavBar'
+import QuickUtility from './QuickUtility'
+import Sidebar from './SideBar'
 
-export default function Homepage({child}) {
-    return (
+export default function Homepage ({ child }) {
+  return (
         <div className='h-screen grid grid-cols-5 gap-x-5'>
             <Sidebar/>
             <div className='col-span-4 grid grid-rows-6 '>
@@ -20,5 +20,5 @@ export default function Homepage({child}) {
                 </div>
             </div>
         </div>
-    );
+  )
 }

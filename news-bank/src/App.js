@@ -1,16 +1,15 @@
 /* eslint-disable react/prop-types */
-import React  from 'react';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-//import { createTheme } from '@mui/material';
-import Login from './views/Login.js';
-import SignUp from './views/SignUp.js';
-import Forgot from './views/Forgot.js';
-import OTPVerify from './components/FundTransfer/OTPVerify.js';
-import InternalTransfer from './components/FundTransfer/InternalTransfer.js';
-import { useEffect } from 'react';
-import HomepageCP from './components/Homepage/HomepageCP.js';
-import Bank from './views/Bank.js';
-import Transaction from './components/FundTransfer/Transaction.js';
+import React, { useEffect } from 'react'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+// import { createTheme } from '@mui/material';
+import InternalTransfer from './app/features/transfer/page/InternalTransfer.js'
+import OTPVerify from './app/features/transfer/page/OTPVerify.js'
+import Transaction from './app/features/transfer/page/Transaction.js'
+import HomepageCP from './components/Homepage/HomepageCP.js'
+import Bank from './views/Bank.js'
+import Forgot from './views/Forgot.js'
+import Login from './views/Login.js'
+import SignUp from './views/SignUp.js'
 
 // const theme = createTheme({
 //   palette:{
@@ -32,11 +31,10 @@ import Transaction from './components/FundTransfer/Transaction.js';
 //   },
 // })
 
-
 const App = () => {
   useEffect(() => {
 
-  });
+  })
   return (
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -57,14 +55,13 @@ const App = () => {
 }
 
 const RequireAuth = ({ children }) => {
-
-  const location = useLocation();
+  const location = useLocation()
 
   if (!localStorage.token) {
     return <Navigate to={'/login'} state={{ from: location }} />
   }
 
-  return children;
+  return children
 }
 
-export default App;
+export default App
