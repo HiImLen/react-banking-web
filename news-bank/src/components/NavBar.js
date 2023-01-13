@@ -29,7 +29,8 @@ export default function NavBar () {
   }
   const handleLogout = () => {
     localStorage.removeItem('token')
-    localStorage.removeItem('userId')
+    localStorage.removeItem('refreshToken')
+    localStorage.removeItem('role_id')
     nagivate('/login')
     handleClose()
   }

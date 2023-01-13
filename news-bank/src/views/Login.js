@@ -17,6 +17,12 @@ export default function Login () {
     LoggedIn()
   })
 
+  const LoggedIn = () => {
+    if (localStorage.token) {
+      nagivate('/')
+    }
+  }
+
   const onSubmit = async (data) => {
     console.log('submit')
     if (!capValue) {
@@ -39,6 +45,7 @@ export default function Login () {
         console.log(res)
         localStorage.token = res.data.data.token
         localStorage.refreshToken = res.data.data.refreshToken
+        localStorage.role_id = parseInt(res.data.data.role_id)
 
         // console.log(location.state);
         const retUrl = location.state?.from?.pathname || '/'
@@ -80,12 +87,6 @@ export default function Login () {
     } else {
       setCapValue('')
       clearErrors(['captcha', 'login'])
-    }
-  }
-
-  const LoggedIn = () => {
-    if (localStorage.token) {
-      nagivate('/')
     }
   }
 

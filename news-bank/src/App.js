@@ -16,7 +16,7 @@ import HomepageCP from './components/Homepage/HomepageCP.js'
 import Bank from './views/Bank.js'
 import Forgot from './views/Forgot.js'
 import Login from './views/Login.js'
-import SignUp from './views/SignUp.js'
+import SignUp from './app/features/employee/page/SignUp.js'
 
 const theme = createTheme({
   palette: {

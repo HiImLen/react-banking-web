@@ -1,9 +1,9 @@
+/* eslint-disable*/
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import signUpImg from '../assets/img/Banking-_Services.jpg'
-import { instance } from '../utils.js'
+import { instance } from '../../../../utils.js'
 
 export default function SignUp () {
   const nagivate = useNavigate()
@@ -14,6 +14,13 @@ export default function SignUp () {
   useEffect(() => {
     IsEmployee()
   })
+
+  const IsEmployee = () => {
+    const roleID = parseInt(localStorage.role_id)
+    if (roleID === 2 || !localStorage.token) {
+      nagivate('/')
+    }
+  }
 
   const onSubmit = async (data) => {
     // setError for all fields name, username, email, phone, password, password_repeat
@@ -53,11 +60,7 @@ export default function SignUp () {
     }
     delete data.password_repeat
     try {
-      const res = await instance.post('/Users', data, {
-        headers: {
-          'x-access-token': localStorage.token
-        }
-      })
+      const res = await instance.post('/Users', data)
       if (res.status === 201) {
         alert('Account created successfully.')
         // console.log(location.state);
@@ -85,12 +88,6 @@ export default function SignUp () {
         console.log('Error', error.message)
       }
       console.log(error.config)
-    }
-  }
-
-  const IsEmployee = () => {
-    if (localStorage.role_id === 2 || !localStorage.token) {
-      nagivate('/')
     }
   }
 
