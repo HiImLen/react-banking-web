@@ -7,7 +7,7 @@ import RecentTrans from '../../assets/icon/RecentTrans.svg'
 import ATMPic from '../../assets/img/ATM_pic.svg'
 
 export default function HomepageCP () {
-  return (
+    return (
         // Những phần ở giữa hompage và ko bao gồm QuickUtility
         <div className="grid grid-rows-5 gap-y-14">
             {/* Chi tiết thông tin card */}
@@ -103,5 +103,5 @@ export default function HomepageCP () {
                 </div>
             </Paper>
         </div>
-  )
+    )
 }

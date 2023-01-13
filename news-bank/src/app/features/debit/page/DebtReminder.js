@@ -22,7 +22,7 @@ export default function DebtReminder () {
                 </div>
             </Link>
             <Link to='debtReminderManagement' style={{ textDecoration: 'none' }}>
-                <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
+                <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '12vw' }}>
                     <Button className="flex flex-grow">
                         <div className="flex flex-grow flex-col items-center gap-y-2">
                             <div style={{ height: '59px', width: '59px' }}><img src={ViewDebt} alt='ViewDebt'/></div>

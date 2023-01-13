@@ -1,10 +1,10 @@
 import { Box, Button, Paper, Typography } from '@mui/material'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import RightArrow from '../assets/icon/RightArrow.svg'
-import InterbankTransfer from '../assets/img/Quick utility/InterbankTransfer.svg'
-import RecentTransaction from '../assets/img/Quick utility/RecentTransaction.svg'
-import TransferWithinBank from '../assets/img/Quick utility/TransferWithinBank.svg'
+import RightArrow from '../../assets/icon/RightArrow.svg'
+import InterbankTransfer from '../../assets/img/Quick utility/InterbankTransfer.svg'
+import RecentTransaction from '../../assets/img/Quick utility/RecentTransaction.svg'
+import TransferWithinBank from '../../assets/img/Quick utility/TransferWithinBank.svg'
 
 export default function QuickUtility () {
   return (

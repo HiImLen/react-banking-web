@@ -4,10 +4,10 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import DownArrow from '../assets/icon/DownArrow.svg'
-import notification from '../assets/icon/notification.svg'
-import avt from '../assets/img/avt.svg'
-import signout from '../assets/img/signout.svg'
+import DownArrow from '../../assets/icon/DownArrow.svg'
+import notification from '../../assets/icon/notification.svg'
+import avt from '../../assets/img/avt.svg'
+import signout from '../../assets/img/signout.svg'
 
 export default function NavBar () {
   const [anchorEl, setAnchorEl] = useState(null)
