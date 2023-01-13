@@ -1,55 +1,36 @@
-import { Button, Dialog, DialogContent, DialogTitle, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from '@mui/material'
-import React from 'react'
+import DeleteIcon from '@mui/icons-material/Delete'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from '@mui/material'
+import moment from 'moment'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router'
 import Close from '../../../../assets/icon/Close.svg'
+import { deleteDebt, fetchDebt, getSourceAccount, setTargetDebt } from '../store/debtSlice'
 
 const columns = [
-  { id: 'name', label: 'Name/Business', minWidth: 170 },
-  { id: 'date', label: 'Date', minWidth: 100 },
+  { id: 'name', label: 'Name/Business' },
+  { id: 'date', label: 'Date' },
   {
     id: 'description',
-    label: 'Description',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US')
+    label: 'Description'
   },
   {
     id: 'amount',
-    label: 'Amount',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US')
+    label: 'Amount'
   },
   {
     id: 'status',
-    label: 'Status',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toFixed(2)
+    label: 'Status'
   }
-]
-
-const rows = [
-  ('India', 'IN', 1324171354, 3287263, 1212),
-  ('China', 'CN', 1403500365, 9596961, 212)
-//   createData('Italy', 'IT', 60483973, 301340),
-//   createData('United States', 'US', 327167434, 9833520),
-//   createData('Canada', 'CA', 37602103, 9984670),
-//   createData('Australia', 'AU', 25475400, 7692024),
-//   createData('Germany', 'DE', 83019200, 357578),
-//   createData('Ireland', 'IE', 4857000, 70273),
-//   createData('Mexico', 'MX', 126577691, 1972550),
-//   createData('Japan', 'JP', 126317000, 377973),
-//   createData('France', 'FR', 67022000, 640679),
-//   createData('United Kingdom', 'GB', 67545757, 242495),
-//   createData('Russia', 'RU', 146793744, 17098246),
-//   createData('Nigeria', 'NG', 200962417, 923768),
-//   createData('Brazil', 'BR', 210147125, 8515767)
 ]
 
 export default function DebtReminderManagement () {
   const [open, setOpen] = React.useState(false)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (row) => {
+    dispatch(setTargetDebt(row))
     setOpen(true)
   }
 
@@ -59,6 +40,10 @@ export default function DebtReminderManagement () {
 
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
+  const listDebt = useSelector((state) => state.debt.listDebt)
+  const targetDebt = useSelector((state) => state.debt.targetDebt)
+  const [dateString, setDateString] = useState('')
+  const sourceAccount = useSelector((state) => state.debt.sourceAccount)
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -68,6 +53,20 @@ export default function DebtReminderManagement () {
     setRowsPerPage(+event.target.value)
     setPage(0)
   }
+  useEffect(() => {
+    dispatch(fetchDebt())
+    dispatch(getSourceAccount())
+  }, [])
+
+  useEffect(() => {
+    if (targetDebt) {
+      const m = new Date(targetDebt.created_at)
+      m.setHours(m.getHours() + 7)
+      const dateString = m.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) + ', ' + moment(m).format('DD/MM/YYYY')
+      setDateString(dateString)
+    } else setDateString('')
+  }, [targetDebt])
+  console.log('targetDebt', targetDebt)
   return (
     <Paper
         className='flex flex-col gap-y-4 py-4 px-5'
@@ -97,21 +96,34 @@ export default function DebtReminderManagement () {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows
+                    {listDebt
                       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                      .map((row) => {
+                      .map((debt) => {
+                        const m = new Date(debt.created_at)
+                        m.setHours(m.getHours() + 7)
+                        console.log('sourceAccount.number', sourceAccount?.number)
+                        console.log('debt.source_account_number', debt.source_account_number)
+                        console.log(debt.source_account_number !== sourceAccount?.number)
+                        console.log(debt)
                         return (
-                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code} onClick={handleClickOpen}>
-                            {columns.map((column) => {
-                              const value = row[column.id]
-                              return (
-                                <TableCell key={column.id} align={column.align}>
-                                {column.format && typeof value === 'number'
-                                  ? column.format(value)
-                                  : value}
-                                </TableCell>
-                              )
-                            })}
+                        <TableRow hover role="checkbox" tabIndex={-1} key={`debt-${debt.id}`} onClick={() => handleClickOpen(debt)}>
+                           <TableCell>{debt.destination_owner_name}</TableCell>
+                           <TableCell>
+                              <Typography>{moment(m).format('LL')}</Typography>
+                              <Typography>{m.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</Typography>
+                            </TableCell>
+                           <TableCell>{debt.note}</TableCell>
+                           <TableCell>{debt.amount}</TableCell>
+                           <TableCell>{debt.isPaid ? 'Paid' : 'Unpaid'}</TableCell>
+                           <TableCell>
+                            <IconButton aria-label="delete" size="large" onClick={(e) => {
+                              e.stopPropagation()
+                              dispatch(setTargetDebt(debt))
+                              dispatch(deleteDebt())
+                            }} disabled={debt.source_account_number !== sourceAccount?.number}>
+                                <DeleteIcon fontSize="inherit" color={debt.source_account_number !== sourceAccount?.number ? 'disable' : 'primary'}/>
+                            </IconButton>
+                           </TableCell>
                         </TableRow>
                         )
                       })}
@@ -121,7 +133,7 @@ export default function DebtReminderManagement () {
             <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
-                count={rows.length}
+                count={listDebt.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
@@ -137,37 +149,39 @@ export default function DebtReminderManagement () {
         </DialogTitle>
         <DialogContent className='mt-3'>
           <Typography className='text-center' color='primary'>Amount</Typography>
-          <Typography className='text-center' sx={{ fontSize: '24px' }} color='black'> .... VND</Typography>
-        </DialogContent>
-        <DialogContent className='flex flex-col justify-center' dividers={true}>
+          <Typography className='text-center mb-3' sx={{ fontSize: '24px' }} color='black'>{targetDebt?.amount?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</Typography>
+        <Divider sx={{ border: '1px solid #ADAEB5' }} />
+        <Box className='flex flex-col justify-center space-y-3 py-4'>
           <Typography sx={{ fontSize: '14px' }} color='grey'> From</Typography>
-          <Typography sx={{ fontSize: '16px', fontWeight: '600', textTransform: 'uppercase' }} color='black'> Do tien trung</Typography>
-          <Typography sx={{ fontSize: '14px' }} color='black'> 0123 45637 83921</Typography>
-        </DialogContent>
-        <DialogContent className='flex flex-col justify-center'>
-          <Typography sx={{ fontSize: '14px' }} color='grey'> To account</Typography>
-          <Typography sx={{ fontSize: '16px', fontWeight: '600', textTransform: 'uppercase' }} color='black'> Vo tran quang thong</Typography>
-          <Typography sx={{ fontSize: '14px' }} color='black'> 0125 51245 35245</Typography>
-        </DialogContent>
-        <DialogContent className='flex flex-col justify-center' dividers={true}>
+          <Typography sx={{ fontSize: '16px', fontWeight: '600', textTransform: 'uppercase' }} color='black'>{targetDebt?.source_owner_name}</Typography>
+          <Typography sx={{ fontSize: '14px' }} color='black'>{targetDebt?.source_account_number}</Typography>
+        </Box>
+        <Divider sx={{ border: '1px solid #ADAEB5' }} />
+        <Box className='flex flex-col justify-center space-y-3 py-4'>
+          <Typography sx={{ fontSize: '14px' }} color='grey'> To</Typography>
+          <Typography sx={{ fontSize: '16px', fontWeight: '600', textTransform: 'uppercase' }} color='black'>{targetDebt?.destination_owner_name}</Typography>
+          <Typography sx={{ fontSize: '14px' }} color='black'>{targetDebt?.destination_account_number}</Typography>
+        </Box>
+        <Divider sx={{ border: '1px solid #ADAEB5' }} />
+        <Box className='flex flex-col justify-center space-y-3 py-4'>
           <Typography sx={{ fontSize: '14px' }} color='grey'> Description</Typography>
-          <Typography sx={{ fontSize: '14px' }} color='black'> Dear Sir, I saw your school in today edition of Viet Nam News ...</Typography>
-        </DialogContent>
-        <DialogContent className='grid grid-rows-3'>
+          <Typography sx={{ fontSize: '14px' }} color='black'>{targetDebt?.note}</Typography>
+        </Box>
+        <Divider sx={{ border: '1px solid #ADAEB5' }} />
+        <Box className='grid grid-rows-3 gap-y-3 py-4'>
           <div className='flex flex-row justify-between'>
             <Typography sx={{ fontSize: '14px' }} color='grey'>Date</Typography>
-            <Typography sx={{ fontSize: '14px' }} color='black'>10:00 am, 05/01/2023</Typography>
-          </div>
-          <div className='flex flex-row justify-between'>
-            <Typography sx={{ fontSize: '14px' }} color='grey'>ID</Typography>
-            <Typography sx={{ fontSize: '14px' }} color='black'> V902340045459948949</Typography>
+            <Typography sx={{ fontSize: '14px' }} color='black'>{dateString}</Typography>
           </div>
           <div className='flex flex-row justify-between'>
             <Typography sx={{ fontSize: '14px' }} color='grey'>Status</Typography>
-            <Typography sx={{ fontSize: '14px' }} color='black'>Success</Typography>
+            <Typography sx={{ fontSize: '14px' }} color='black'>{targetDebt?.isPaid ? 'Paid' : 'Unpaid'}</Typography>
           </div>
+        </Box>
         </DialogContent>
-        <DialogContent className='flex justify-center'>
+        <DialogActions sx={{ justifyContent: 'center' }}>
+        {((targetDebt?.source_account_number !== sourceAccount?.number) && !targetDebt?.isPaid)
+          ? (
           <Button className='w-4/5 h-12' color='primary' sx={{
             borderRadius: '10px',
             background: '#4D54E4',
@@ -175,10 +189,13 @@ export default function DebtReminderManagement () {
               background: '#2a2e80'
             },
             textTransform: 'none'
-          }}>
+          }}
+          onClick={() => navigate(`/debt/${targetDebt.id}/pay`)}
+          >
             <Typography sx={{ fontSize: '18px' }} color='white'>Payment</Typography>
-          </Button>
-        </DialogContent>
+          </Button>)
+          : (<></>)}
+        </DialogActions>
       </Dialog>
     </Paper>
   )

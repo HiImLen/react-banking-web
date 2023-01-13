@@ -32,9 +32,6 @@ instance.interceptors.response.use((response) => {
   }
   console.log('abc')
   return instance.post('/RefreshToken/Refresh', { refreshToken: localStorage.refreshToken }, { withCrendentials: true }).then((success) => {
-    console.log('abc')
-    console.log('success', success)
-    console.log(err.response.config)
     const config = err.response.config
     config.headers['x-access-token'] = success.data.data.token
     localStorage.token = success.data.data.token

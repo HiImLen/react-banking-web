@@ -1,42 +1,39 @@
-import { Box, Button, FormControl, InputLabel, MenuItem, Paper, Select, Typography } from '@mui/material'
+import { Button, CircularProgress, FormControl, InputLabel, MenuItem, Paper, Select, Typography } from '@mui/material'
 import TextField from '@mui/material/TextField'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import avt from '../../../../assets/img/avt2.svg'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
-import { createTransaction, getDestinationAccount, getSourceAccount } from '../store/transferSlice'
+import { useNavigate, useParams } from 'react-router'
+import { getSourceAccount, payDebt } from '../store/debtSlice'
+import { getDebtReminder } from '../store/debtTranscriptSlice'
+import OTPVerify from './OTPVerify'
+// import { createTransaction, getDestinationAccount, getSourceAccount } from '../store/transferSlice'
 
 export default function InternalTransfer () {
-  const { register, handleSubmit, setValue, setError, clearErrors, formState: { errors } } = useForm()
+  const { register, handleSubmit, formState: { errors } } = useForm()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [isOTPVerify, setIsOTPVerify] = useState(false)
+  const { id } = useParams()
 
-  const sourceAccount = useSelector((state) => state.transfer.sourceAccount)
-  const destinationAccount = useSelector((state) => state.transfer.destinationAccount)
+  const debtReminder = useSelector((state) => state.debtTranscript.debtReminder)
+  const sourceAccount = useSelector((state) => state.debt.sourceAccount)
 
   useEffect(() => {
+    dispatch(getDebtReminder({ id }))
     dispatch(getSourceAccount())
   }, [])
-  useEffect(() => {
-    console.log(destinationAccount)
-    if (destinationAccount) {
-      clearErrors('destination_account_number')
-    } else {
-      setError('destination_account_number', { type: 'manual', message: 'Invalid account number' })
-    }
-  // eslint-disable-next-line no-use-before-define
-  }, [destinationAccount])
 
   const onSubmit = async (data) => {
-    dispatch(createTransaction({ data, navigate }))
+    dispatch(payDebt({ data }))
+    setIsOTPVerify(true)
   }
-  const valueOfMoney = [100000, 200000, 500000, 1000000, 2000000, 5000000]
   console.log(errors)
 
-  return (
-    <div className='grid grid-cols-5 mb-10'>
+  return (!isOTPVerify && debtReminder)
+    ? (<div className='grid grid-cols-5 mb-10'>
         <div/>
         <div className='col-span-3 flex flex-col'>
             <Paper
@@ -55,16 +52,9 @@ export default function InternalTransfer () {
                 <Typography className="font-semibold text-lg leading-6">Transfer to</Typography>
                 <form className='flex flex-col space-y-4' onSubmit={handleSubmit(onSubmit)}>
                     <div>
-                        <TextField className='border-sky-500 border-2 w-full' id="outlined-basic" placeholder="Account number" variant="outlined" {...register('destination_account_number', { required: true })} onBlur={async (data) => {
-                          dispatch(getDestinationAccount({ accountNumber: data.target.value }))
-                        }}/>
-                        {errors.destination_account_number && <p className='text-red-500'>{errors.destination_account_number.message}</p>}
+                        <TextField className='border-sky-500 border-2 w-full' id="outlined-basic" placeholder="Account number" variant="outlined" value={debtReminder.source_account_number} disabled/>
                     </div>
-                    {destinationAccount
-                      ? (
-                            <TextField className='border-sky-500 border-2' id="outlined-basic" placeholder="The recipient name"variant="outlined" value={destinationAccount?.username} disabled/>
-                        )
-                      : (<></>)}
+                    <TextField className='border-sky-500 border-2' id="outlined-basic" placeholder="The recipient name"variant="outlined" defaultValue={debtReminder.source_owner_name} disabled/>
                     <FormControl>
                         <InputLabel id="form-paid-fee-label">Select a form of fee payment</InputLabel>
                         <Select labelId="form-paid-fee-label" label="Select a form of fee payment" defaultValue={true} {...register('fee_is_paid_by_receiver')}>
@@ -72,12 +62,7 @@ export default function InternalTransfer () {
                             <MenuItem value={false}>Paid sender</MenuItem>
                         </Select>
                     </FormControl>
-                    <TextField className='border-sky-500 border-2' id="outlined-basic" placeholder="Amount VND" variant="outlined" {...register('amount', { required: true })} type="number" />
-                    <Box className="grid grid-cols-3 grid-rows-2 gap-y-5 gap-x-3">
-                        {valueOfMoney.map((data, index) => (<Button key={`${index}-button-money`} style={{ background: '#E0E0E0', borderRadius: '15px', color: 'black' }} className="py-2" value={data} onClick={() => {
-                          setValue('amount', data)
-                        }}>{data.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</Button>))}
-                    </Box>
+                    <TextField className='border-sky-500 border-2' id="outlined-basic" placeholder="Amount VND" variant="outlined" type="number" value={debtReminder.amount} disabled/>
                     <TextField
                         id="outlined-multiline-static"
                         label="Description"
@@ -97,5 +82,8 @@ export default function InternalTransfer () {
             </div>
         </div>
     </div>
-  )
+      )
+    : (isOTPVerify)
+        ? (<OTPVerify />)
+        : (<CircularProgress/>)
 }

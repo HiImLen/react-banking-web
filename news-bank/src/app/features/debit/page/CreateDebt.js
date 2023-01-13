@@ -6,31 +6,36 @@ import avt from '../../../../assets/img/avt2.svg'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { createTransaction, getDestinationAccount, getSourceAccount } from '../store/transferSlice'
+import { parseJwt } from '../../../../utils'
+import { createDebtReminder, getDestinationAccount, getSourceAccount } from '../store/debtSlice.js'
 
 export default function CreateDebt () {
   const { register, handleSubmit, setValue, setError, clearErrors, formState: { errors } } = useForm()
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const sourceAccount = useSelector((state) => state.transfer.sourceAccount)
-  const destinationAccount = useSelector((state) => state.transfer.destinationAccount)
+  const sourceAccount = useSelector((state) => state.debt.sourceAccount)
+  const destinationAccount = useSelector((state) => state.debt.destinationAccount)
+  console.log('sourceAccount', sourceAccount)
+  console.log('destinationAccount', destinationAccount)
 
   useEffect(() => {
     dispatch(getSourceAccount())
   }, [])
   useEffect(() => {
     console.log(destinationAccount)
-    if (destinationAccount !== {}) {
+    if (destinationAccount) {
       clearErrors('destination_account_number')
     } else {
-      setError('destination_account_number', { type: 'custom', message: 'Invalid account number' })
+      setError('destination_account_number', { type: 'manual', message: 'Invalid account number' })
     }
   // eslint-disable-next-line no-use-before-define
   }, [destinationAccount])
 
   const onSubmit = async (data) => {
-    dispatch(createTransaction({ data, navigate }))
+    const user = parseJwt(localStorage.token)
+    console.log('user', user)
+    dispatch(createDebtReminder({ data: { ...data, source_owner_name: user.name }, navigate }))
   }
   const valueOfMoney = [100000, 200000, 500000, 1000000, 2000000, 5000000]
   console.log(errors)
@@ -46,7 +51,7 @@ export default function CreateDebt () {
             >
                 <img src={avt} alt='avatar'/>
                 <div className='flex flex-col justify-center'>
-                  <Typography className='text-black text-left'>{sourceAccount.number}</Typography>
+                  <Typography className='text-black text-left'>{sourceAccount?.number}</Typography>
                   <Typography className='text-black text-left' style={{ fontWeight: 600 }}>{sourceAccount?.balance?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</Typography>
                 </div>
             </Paper>
@@ -59,9 +64,9 @@ export default function CreateDebt () {
                       }}/>
                       {errors.destination_account_number && <p className='text-red-500'>{errors.destination_account_number.message}</p>}
                     </div>
-                    {destinationAccount !== {}
+                    {destinationAccount
                       ? (
-                            <TextField className='border-sky-500 border-2' id="outlined-basic" placeholder="The recipient name"variant="outlined" value={destinationAccount.name} disabled/>
+                            <TextField className='border-sky-500 border-2' id="outlined-basic" placeholder="The recipient name"variant="outlined" value={destinationAccount?.name} disabled/>
                         )
                       : (<></>)}
                     <TextField className='border-sky-500 border-2' id="outlined-basic" placeholder="Amount VND" variant="outlined" {...register('amount', { required: true })} type="number" />

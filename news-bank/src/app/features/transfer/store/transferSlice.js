@@ -68,7 +68,7 @@ export const verifyOTP = createAsyncThunk(
       const res = await instance.post('/Transactions/VerifyOTP', {
         otp
       })
-      if ((res.status === 200 || res.status === 201) && res.data.status === 'success') { dispatch(setStatus(true)); navigate(`/transaction/${targetTransactionId}/success`) } else { dispatch(false); navigate(`/transaction/${targetTransactionId}/fail`) }
+      if ((res.status === 200 || res.status === 201) && res.data.status === 'success') { dispatch(setStatus(true)); navigate(`/transaction/${targetTransactionId}/script`) } else { dispatch(false); navigate(`/transaction/${targetTransactionId}/script`) }
     } catch (err) {
 
     }
