@@ -1,10 +1,13 @@
 import React from 'react'
-import Navbar from './Navbar/NavBarUser'
+import Navbar from './Navbar/Navbar/NavBarUser'
+import QuickUtilityUser from './QuickUtility/QuickUtilityUserUser'
 import QuickUtilityUser from './QuickUtility/QuickUtilityUser'
-import QuickUtilityEmployee from './QuickUtility/QuickUtilityEmployee'
-import SideBarUser from './Sidebar/SideBarUser'
+import QuickUtilityEmployeeEmployee from './QuickUtility/QuickUtilityEmployee/QuickUtilityEmployee'
+import SideBarUser from './SideBarUser from './Sidebar/SideBarUser'
+import SideBarAdmin/SideBarUser'
 import SideBarAdmin from './Sidebar/SideBarAdmin'
-import SideBarEmployee from  './Sidebar/SideBarEmployee'
+import SideBarEmployee from  './Sidebar/Sidebar/SideBarAdmin'
+import SideBarEmployee from  './Sidebar/SideBarEmployeeEmployee'
 
 export default function Homepage ({ child }) {
     const roleID = parseInt(localStorage.role_id);
