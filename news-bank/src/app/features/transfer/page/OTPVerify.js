@@ -1,7 +1,7 @@
 import { Button, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import OtpInput from 'react18-input-otp'
 import { parseJwt } from '../../../../utils.js'
@@ -9,7 +9,8 @@ import { setTargetTransactionId, verifyOTP } from '../store/transferSlice.js'
 
 export default function OTPVerify () {
   const [otp, setOtp] = useState('')
-  const currentUser = parseJwt(localStorage.token)
+  const token = useSelector((state) => state.transfer.token)
+  const currentUser = parseJwt(token)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { id } = useParams()

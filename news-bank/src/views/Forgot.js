@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 import imgForgot from '../assets/img/forgot.jpg'
 import ResetPassword from '../components/Forgot/ResetPassword'
@@ -11,6 +12,7 @@ export default function Forgot () {
 
   const [isReset, setIsReset] = useState(false)
   const [email, setEmail] = useState('')
+  const token = useSelector((state) => state.login.token)
 
   useEffect(() => {
     LoggedIn()
@@ -29,7 +31,7 @@ export default function Forgot () {
   }
 
   const LoggedIn = () => {
-    if (localStorage.token) {
+    if (token) {
       nagivate('/')
     }
   }

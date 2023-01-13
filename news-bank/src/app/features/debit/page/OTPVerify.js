@@ -1,7 +1,7 @@
 import { Button, Typography } from '@mui/material'
 import React, { useState } from 'react'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import OtpInput from 'react18-input-otp'
 import { parseJwt } from '../../../../utils.js'
@@ -9,7 +9,8 @@ import { verifyOTP } from '../store/debtSlice.js'
 
 export default function OTPVerify () {
   const [otp, setOtp] = useState('')
-  const currentUser = parseJwt(localStorage.token)
+  const token = useSelector((state) => state.login.token)
+  const currentUser = parseJwt(token)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 

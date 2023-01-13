@@ -33,7 +33,8 @@ export default function CreateDebt () {
   }, [destinationAccount])
 
   const onSubmit = async (data) => {
-    const user = parseJwt(localStorage.token)
+    const token = useSelector((state) => state.login.token)
+    const user = parseJwt(token)
     console.log('user', user)
     dispatch(createDebtReminder({ data: { ...data, source_owner_name: user.name }, navigate }))
   }

@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { setLoginInfo } from '../slice/loginSlice'
 
 import imgLogin from '../assets/img/login-img.jpeg'
-import { instance } from '../utils.js'
+import { instance, parseJwt } from '../utils.js'
+
 
 export default function Login () {
+  const dispatch = useDispatch()
   const nagivate = useNavigate()
   const location = useLocation()
 
   const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm()
   const [capValue, setCapValue] = useState('')
+  const token = useSelector((state) => state.login.token)
 
   useEffect(() => {
     LoggedIn()
   })
 
   const LoggedIn = () => {
-    if (localStorage.token) {
+    if (token) {
       nagivate('/')
     }
   }
@@ -39,13 +44,22 @@ export default function Login () {
       return
     }
     try {
-      console.log(data)
       const res = await instance.post('/Users/Login', data)
       if (res.status === 200) {
-        console.log(res)
-        localStorage.token = res.data.data.token
-        localStorage.refreshToken = res.data.data.refreshToken
-        localStorage.role_id = parseInt(res.data.data.role_id)
+        //console.log(res)
+        localStorage.setItem('token', res.data.data.token)
+        localStorage.setItem('refreshToken', res.data.data.refreshToken)
+        const token = parseJwt(res.data.data.token)
+        const data = {
+          token: res.data.data.token,
+          refreshToken: res.data.data.refreshToken,
+          username: token.username,
+          email: token.email,
+          phone: token.phone,
+          name: token.name,
+          role_id: token.role_id
+        }
+        dispatch(setLoginInfo(data))
 
         // console.log(location.state);
         const retUrl = location.state?.from?.pathname || '/'

@@ -5,9 +5,11 @@ import QuickUtilityEmployee from './QuickUtility/QuickUtilityEmployee'
 import SideBarUser from './Sidebar/SideBarUser' 
 import SideBarAdmin from './Sidebar/SideBarAdmin'
 import SideBarEmployee from  './Sidebar/SideBarEmployee'
+import { useSelector } from 'react-redux'
 
 export default function Homepage ({ child }) {
-    const roleID = parseInt(localStorage.role_id);
+    const role_id = useSelector((state) => state.login.role_id)
+    const roleID = parseInt(role_id);
     return (
         <div className='h-screen grid grid-cols-5 gap-x-5' style={{ background: '#F8F9FD' }}>
             {roleID == 1 ? <SideBarAdmin /> : roleID == 2 ? <SideBarUser />: <SideBarEmployee/>}

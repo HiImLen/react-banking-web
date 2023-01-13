@@ -8,12 +8,16 @@ import DownArrow from '../../assets/icon/DownArrow.svg'
 import notification from '../../assets/icon/notification.svg'
 import avt from '../../assets/img/avt.svg'
 import signout from '../../assets/img/signout.svg'
+import { clearLoginInfo } from '../../slice/loginSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function NavBar () {
   const [anchorEl, setAnchorEl] = useState(null)
   const [anchorEl2, setAnchorEl2] = useState(null)
   const open = Boolean(anchorEl)
   const open2 = Boolean(anchorEl2)
+  const dispatch = useDispatch()
+  const name = useSelector((state) => state.login.name)
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
@@ -30,7 +34,7 @@ export default function NavBar () {
   const handleLogout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('refreshToken')
-    localStorage.removeItem('role_id')
+    dispatch(clearLoginInfo())
     nagivate('/login')
     handleClose()
   }
@@ -51,7 +55,7 @@ export default function NavBar () {
 
           </Button>
           <img src={avt} alt='avatar'/>
-          <Typography className='text-black' style={{ fontWeight: 600 }}>DO TIEN TRUNG</Typography>
+          <Typography className='text-black' style={{ fontWeight: 600 }}>{name}</Typography>
           <Button
             id="basic-button"
             aria-controls={open ? 'basic-menu' : undefined}

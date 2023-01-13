@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { instance } from '../utils'
 
 const initialState = {
   token: '',
@@ -29,9 +28,12 @@ export const loginSlice = createSlice({
       state.phone = action.payload.phone
       state.name = action.payload.name
       state.role_id = action.payload.role_id
+    },
+    setToken: (state, action) => {
+      state.token = action.payload
     }
   }
 })
 
-//export const { } = loginSlice.actions
+export const { setLoginInfo, setToken } = loginSlice.actions
 export default loginSlice.reducer

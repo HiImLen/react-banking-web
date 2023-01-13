@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import { useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { instance } from '../../../../utils.js'
@@ -9,14 +10,16 @@ export default function SignUp () {
   const location = useLocation()
 
   const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm()
+  const token = useSelector((state) => state.login.token)
+  const role_id = useSelector((state) => state.login.role_id)
 
   useEffect(() => {
     IsEmployee()
   })
 
   const IsEmployee = () => {
-    const roleID = parseInt(localStorage.role_id)
-    if (roleID === 2 || !localStorage.token) {
+    const roleID = parseInt(role_id)
+    if (roleID === 2 || !token) {
       nagivate('/')
     }
   }

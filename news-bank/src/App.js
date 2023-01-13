@@ -16,6 +16,7 @@ import Bank from './views/Bank.js'
 import Forgot from './views/Forgot.js'
 import Login from './views/Login.js'
 import SignUp from './app/features/employee/page/SignUp.js'
+import { useSelector } from 'react-redux'
 
 const theme = createTheme({
   palette: {
@@ -38,6 +39,7 @@ const theme = createTheme({
 })
 
 const App = () => {
+  const token = useSelector((state) => state.login.token)
   useEffect(() => {
 
   })
@@ -48,7 +50,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/" element={
-            <RequireAuth>
+            <RequireAuth token={token}>
               <Bank />
             </RequireAuth>
           }>
@@ -69,10 +71,10 @@ const App = () => {
   )
 }
 
-const RequireAuth = ({ children }) => {
+const RequireAuth = ({ children, token }) => {
   const location = useLocation()
 
-  if (!localStorage.token) {
+  if (!token) {
     return <Navigate to={'/login'} state={{ from: location }} />
   }
 
