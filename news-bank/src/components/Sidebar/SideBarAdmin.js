@@ -33,12 +33,6 @@ export default function SideBarAdmin () {
                     <img src={DebtReminderManagement} alt='DebtReminderManagement'></img>
                     <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Transactions With Other Banks</Typography>
                 </Link>
-                <Link to='/debt' style={{ textDecoration: 'none' }}>
-                    <div className='flex flex-row justify-left items-center ml-3 gap-x-2'>
-                        <img src={RecentTransSidebar} alt='RecentTransSidebar'></img>
-                        <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Recent Transactions</Typography>
-                    </div>
-                </Link>
             </Box>
         </Paper>
   )

@@ -8,7 +8,7 @@ import TransferWithinBank from '../../assets/img/Quick utility/TransferWithinBan
 
 export default function QuickUtilityEmployee () {
   return (
-        // gồm 3 button chức năng
+        // gồm 2 button chức năng
         <div className="grid grid-rows-5">
             <Paper
                 className='row-span-3 p-3 space-y-2'
@@ -16,13 +16,13 @@ export default function QuickUtilityEmployee () {
                 sx={{ borderRadius: '10px' }}
             >
                 <Typography className='text-black text-left' style={{ fontWeight: 600 }}>Quick Utility</Typography>
-                <div className="grid grid-rows-3 gap-y-5">
+                <div className="grid grid-rows-2 gap-y-5">
                         <Link to='/signup' style={{ textDecoration: 'none' }}>
                             <Box className="flex border-2 rounded-md">
                                 <Button className="flex flex-grow">
                                     <Box className="flex flex-row flex-grow justify-between px-2">
                                         <img src={TransferWithinBank} alt='TransferWithinBank'/>
-                                        <Typography className='text-black text-left self-center' style={{ textTransform: 'none' }}>Create Customer Account</Typography>
+                                        <Typography className='text-black text-left self-center' style={{ textTransform: 'none' }}>Employee Manager</Typography>
                                         <img src={RightArrow} alt='RightArrow'/>
                                     </Box>
                                 </Button>
@@ -33,18 +33,7 @@ export default function QuickUtilityEmployee () {
                             <Button className="flex flex-grow">
                                 <Box className="flex flex-row flex-grow justify-between px-2">
                                     <img src={InterbankTransfer} alt='InterbankTransfer'/>
-                                    <Typography className='text-black text-left self-center' style={{ textTransform: 'none' }}>Deposit Money</Typography>
-                                    <img src={RightArrow} alt='RightArrow'/>
-                                </Box>
-                            </Button>
-                        </Box>
-                        </Link>
-                        <Link to='/recent' style={{ textDecoration: 'none' }}>
-                        <Box className="flex border-2 rounded-md">
-                            <Button className="flex flex-grow">
-                                <Box className="flex flex-row flex-grow justify-between px-2">
-                                    <img src={RecentTransaction} alt='RecentTransaction'/>
-                                    <Typography className='text-black text-left self-center' style={{ textTransform: 'none' }}>Recent Transactions</Typography>
+                                    <Typography className='text-black text-left self-center' style={{ textTransform: 'none' }}>Transactions With Other Banks</Typography>
                                     <img src={RightArrow} alt='RightArrow'/>
                                 </Box>
                             </Button>

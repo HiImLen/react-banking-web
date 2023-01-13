@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 // import { createTheme } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material'
+import RecentTransactionEmployee from './app/features/employee/page/RecentTransactionEmployee.js'
 import CreateDebt from './app/features/debit/page/CreateDebt.js'
 import DebtReminder from './app/features/debit/page/DebtReminder.js'
 import DebtReminderManagement from './app/features/debit/page/DebtReminderManagement.js'
@@ -43,28 +44,28 @@ const App = () => {
   })
   return (
     <ThemeProvider theme={theme}>
-
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgot" element={<Forgot />} />
-          <Route path="/" element={
-            <RequireAuth>
-              <Bank />
-            </RequireAuth>
-          }>
-            <Route index element={<HomepageCP/>} />
-            <Route path="transfer" element={<FundTransfer />} />
-            <Route exact path="transfer/inter" element={<InternalTransfer />} />
-            <Route exact path="debt" element={<DebtReminder />} />
-            <Route exact path="debt/createDebtReminder" element={<CreateDebt />} />
-            <Route exact path="debt/debtReminderManagement" element={<DebtReminderManagement />} />
-            <Route path = "debt/:id/pay" element={(<InternalTransferDebt />)}/>
-            <Route path = "debtReminder/:id/script" element={<TransactionDebt />} />
-            <Route path='transaction/:id/otpVerify' element={<OTPVerify />} />
-            <Route path='transaction/:id/script' element={<Transaction/>}/>
-            <Route path="signup" element={<SignUp />} />
-          </Route>
-        </Routes>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/forgot" element={<Forgot />} />
+        <Route path="/" element={
+          <RequireAuth>
+            <Bank />
+          </RequireAuth>
+        }>
+          <Route index element={<HomepageCP />} />
+          <Route path="transfer" element={<FundTransfer />} />
+          <Route exact path="transfer/inter" element={<InternalTransfer />} />
+          <Route exact path="debt" element={<DebtReminder />} />
+          <Route exact path="debt/createDebtReminder" element={<CreateDebt />} />
+          <Route exact path="debt/debtReminderManagement" element={<DebtReminderManagement />} />
+          <Route path="debt/:id/pay" element={(<InternalTransferDebt />)} />
+          <Route path="debtReminder/:id/script" element={<TransactionDebt />} />
+          <Route path='transaction/:id/otpVerify' element={<OTPVerify />} />
+          <Route path='transaction/:id/script' element={<Transaction />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="recent" element={<RecentTransactionEmployee />} />
+        </Route>
+      </Routes>
     </ThemeProvider>
   )
 }

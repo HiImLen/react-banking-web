@@ -18,7 +18,7 @@ export default function SignUp () {
 
   const IsEmployee = () => {
     const roleID = parseInt(role_id)
-    if (roleID === 2 || !localStorage.token) {
+    if (roleID !== 3 || !localStorage.token) {
       nagivate('/')
     }
   }

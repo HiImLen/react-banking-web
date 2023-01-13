@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import Close from '../../../../assets/icon/Close.svg'
-import { deleteDebt, fetchDebt, getSourceAccount, setTargetDebt } from '../store/debtSlice'
+import { deleteDebt, fetchDebt, getSourceAccount, setTargetDebt } from '../../debit/store/debtSlice'
 
 const columns = [
   { id: 'name', label: 'Name/Business' },
