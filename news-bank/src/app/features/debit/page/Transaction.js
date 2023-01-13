@@ -9,7 +9,8 @@ import DownArrowLight from '../../../../assets/icon/DownArrowLight.svg'
 import avt from '../../../../assets/img/avt2.svg'
 import TransactionFail from '../../../../assets/img/TransactionFail.svg'
 import TransactionSuccess from '../../../../assets/img/TransactionSuccessful.svg'
-import { getTransaction } from '../store/transferSlice'
+import { getTransaction } from '../../transfer/store/transferSlice'
+// import { getTransaction } from '../store/transferSlice'
 
 const convertViToEn = (str, toUpperCase = false) => {
   str = str.toLowerCase()

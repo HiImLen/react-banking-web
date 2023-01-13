@@ -1,5 +1,5 @@
 import { Button, CircularProgress, Divider, Paper, Typography } from '@mui/material'
-import moment from 'moment/moment'
+import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
@@ -7,9 +7,8 @@ import { Link } from 'react-router-dom'
 import DownArrow from '../../../../assets/icon/DownArrow.svg'
 import DownArrowLight from '../../../../assets/icon/DownArrowLight.svg'
 import avt from '../../../../assets/img/avt2.svg'
-import TransactionFail from '../../../../assets/img/TransactionFail.svg'
 import TransactionSuccess from '../../../../assets/img/TransactionSuccessful.svg'
-import { getTransaction } from '../store/transferSlice'
+import { getDebtReminder } from '../store/debtTranscriptSlice'
 
 const convertViToEn = (str, toUpperCase = false) => {
   str = str.toLowerCase()
@@ -27,30 +26,30 @@ const convertViToEn = (str, toUpperCase = false) => {
   return toUpperCase ? str.toUpperCase() : str
 }
 
-export default function Transaction () {
+export default function DebtReminderTranscript () {
   const { id } = useParams()
   const dispatch = useDispatch()
 
-  const transaction = useSelector((state) => state.transfer.transaction)
+  const debtReminder = useSelector((state) => state.debtTranscript.debtReminder)
   const [dateString, setDateString] = useState('')
   useEffect(() => {
-    if (transaction) {
-      const m = new Date(transaction.created_at)
+    if (debtReminder) {
+      const m = new Date(debtReminder.created_at)
       m.setHours(m.getHours() + 7)
       const dateString = m.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }) + ', ' + moment(m).format('DD/MM/YYYY')
       setDateString(dateString)
     }
-  }, [transaction])
+  }, [debtReminder])
 
   useEffect(() => {
-    dispatch(getTransaction({ id }))
+    dispatch(getDebtReminder({ id }))
   }, [])
-  return transaction
+  return debtReminder
     ? (<div className="grid grid-cols-2">
     <div className='flex flex-col items-center space-y-10'>
-      <div style={{ maxHeight: '135px', maxWidth: '135px' }}>{transaction.status_id === 2 ? (<img src={TransactionSuccess} alt='WithinBank'/>) : (<img src={TransactionFail} alt='WithinBank'/>)}</div>
-      <Typography className='text-blue-500' style={{ fontWeight: 600 }}>Transaction {transaction.status_id === 2 ? ('successful') : ('failed')} !!!</Typography>
-      <Typography className='text-blue-500' style={{ fontSize: '32px', fontWeight: 600 }}>{transaction.amount.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })} </Typography>
+      <div style={{ maxHeight: '135px', maxWidth: '135px' }}><img src={TransactionSuccess} alt='WithinBank'/></div>
+      <Typography className='text-blue-500' style={{ fontWeight: 600 }}>Create Debt Reminder successful !!!</Typography>
+      <Typography className='text-blue-500' style={{ fontSize: '32px', fontWeight: 600 }}>{debtReminder.amount.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })} </Typography>
     </div>
     <div className='flex flex-col space-y-5'>
       <Paper
@@ -70,24 +69,19 @@ export default function Transaction () {
           </div>
           <div className='col-span-3 grid grid-rows-2 justify-items-start content-center gap-y-2'>
             <div className="grid grid-rows-2 border-b-2 w-full items-center">
-              <Typography sx={{ fontWeight: '600', lineHeight: '19px', fontSize: '16px' }}>{convertViToEn(transaction.source_owner_name, true)}</Typography>
-              <Typography sx={{ fontWeight: '600', lineHeight: '17px', fontSize: '14px', color: '#ADAEB5' }}>{transaction.source_account_number}</Typography>
+              <Typography sx={{ fontWeight: '600', lineHeight: '19px', fontSize: '16px' }}>{convertViToEn(debtReminder.source_owner_name, true)}</Typography>
+              <Typography sx={{ fontWeight: '600', lineHeight: '17px', fontSize: '14px', color: '#ADAEB5' }}>{debtReminder.source_account_number}</Typography>
             </div>
             <div className='grid grid-rows-2 items-center'>
-              <Typography sx={{ fontWeight: '600', lineHeight: '19px', fontSize: '16px' }}>{convertViToEn(transaction.destination_owner_name, true)}</Typography>
-              <Typography sx={{ fontWeight: '500', lineHeight: '17px', fontSize: '14px' }}>{transaction.destination_account_number}</Typography>
+              <Typography sx={{ fontWeight: '600', lineHeight: '19px', fontSize: '16px' }}>{convertViToEn(debtReminder.destination_owner_name, true)}</Typography>
+              <Typography sx={{ fontWeight: '500', lineHeight: '17px', fontSize: '14px' }}>{debtReminder.destination_account_number}</Typography>
             </div>
           </div>
         </div>
         <Divider sx={{ border: '1px solid #ADAEB5' }} />
         <div className="space-y-4">
-          <Typography sx={{ fontWeight: '600', lineHeight: '17px', fontSize: '14px', color: '#ADAEB5' }}>ID</Typography>
-          <Typography>{transaction.code}</Typography>
-        </div>
-        <Divider sx={{ border: '1px solid #ADAEB5' }} />
-        <div className="space-y-4">
           <Typography sx={{ fontWeight: '600', lineHeight: '17px', fontSize: '14px', color: '#ADAEB5' }}>Note</Typography>
-          <Typography>{transaction.note}</Typography>
+          <Typography>{debtReminder.note}</Typography>
         </div>
         <Divider sx={{ border: '1px solid #ADAEB5' }} />
         <div className="space-y-4">
