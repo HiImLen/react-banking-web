@@ -1,4 +1,3 @@
-/* eslint-disable*/
 import { configureStore } from '@reduxjs/toolkit'
 import debtReducer from './features/debit/store/debtSlice.js'
 import debtTranscriptReducer from './features/debit/store/debtTranscriptSlice.js'

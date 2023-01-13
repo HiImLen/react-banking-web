@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { instance } from '../../utils.js'
