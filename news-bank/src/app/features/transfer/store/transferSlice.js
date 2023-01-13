@@ -6,7 +6,8 @@ const initialState = {
   destinationAccount: null,
   status: true,
   targetTransactionId: null,
-  transaction: null
+  transaction: null,
+  receiver: {}
 }
 
 export const getSourceAccount = createAsyncThunk(
@@ -88,6 +89,36 @@ export const getTransaction = createAsyncThunk(
   }
 )
 
+export const getReceiver = createAsyncThunk(
+  'transfer/getReceiver',
+  async ({ accountNumber }, { dispatch, getState }) => {
+    try {
+      const res = await instance.get(`/Receivers/Number/${accountNumber}`)
+      if (res.data.status === 'success') dispatch(setReceiver(res.data.data))
+      else dispatch(setReceiver(null))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+)
+
+export const createReceiver = createAsyncThunk(
+  'transfer/createReceiver',
+  async (params, { dispatch, getState }) => {
+    try {
+      const { destinationAccount } = getState().transfer
+      const res = await instance.post('/Receivers', {
+        reminiscent_name: params.name,
+        account_number: destinationAccount.number,
+        bank_id: params.bank_id ?? 1
+      })
+      if (res.status === 201) dispatch(setReceiver(res.data.data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+)
+
 export const transferSlice = createSlice({
   name: 'transfer',
   initialState,
@@ -106,9 +137,12 @@ export const transferSlice = createSlice({
     },
     setTransaction: (state, action) => {
       state.transaction = action.payload
+    },
+    setReceiver: (state, action) => {
+      state.receiver = action.payload
     }
   }
 })
 
-export const { setSourceAccount, setDestinationAccount, setStatus, setTargetTransactionId, setTransaction } = transferSlice.actions
+export const { setSourceAccount, setDestinationAccount, setStatus, setTargetTransactionId, setTransaction, setReceiver } = transferSlice.actions
 export default transferSlice.reducer

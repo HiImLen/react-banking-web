@@ -12,7 +12,7 @@ export default function DebtReminder () {
             sx={{ borderRadius: '10px' }}
         >
             <Link to='createDebtReminder' style={{ textDecoration: 'none' }}>
-                <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
+                <div className="flex items-center justify-center rounded-lg py-2" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '12vw' }}>
                     <Button className="flex flex-grow">
                         <div className="flex flex-grow flex-col items-center gap-y-2">
                             <div style={{ height: '59px', width: '59px' }}><img src={CreateDebt} alt='CreateDebt'/></div>

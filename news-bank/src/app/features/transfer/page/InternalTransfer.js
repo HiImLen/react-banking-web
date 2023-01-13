@@ -1,20 +1,26 @@
-import { Box, Button, FormControl, InputLabel, MenuItem, Paper, Select, Typography } from '@mui/material'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, IconButton, InputAdornment, InputLabel, MenuItem, Paper, Select, Typography } from '@mui/material'
 import TextField from '@mui/material/TextField'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import avt from '../../../../assets/img/avt2.svg'
 
+import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { createTransaction, getDestinationAccount, getSourceAccount } from '../store/transferSlice'
+import Close from '../../../../assets/icon/Close.svg'
+import { createReceiver, createTransaction, getDestinationAccount, getReceiver, getSourceAccount } from '../store/transferSlice'
 
 export default function InternalTransfer () {
   const { register, handleSubmit, setValue, setError, clearErrors, formState: { errors } } = useForm()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [open, setOpen] = useState(false)
+  const [acceptCreate, setAcceptCreate] = useState(false)
+  const [receiverName, setReceiverName] = useState('')
 
   const sourceAccount = useSelector((state) => state.transfer.sourceAccount)
   const destinationAccount = useSelector((state) => state.transfer.destinationAccount)
+  const receiver = useSelector((state) => state.transfer.receiver)
 
   useEffect(() => {
     dispatch(getSourceAccount())
@@ -29,13 +35,23 @@ export default function InternalTransfer () {
   // eslint-disable-next-line no-use-before-define
   }, [destinationAccount])
 
+  useEffect(() => {
+    console.log('fetch receiver', receiver)
+    if (!receiver) setOpen(true)
+  }, [receiver])
+
   const onSubmit = async (data) => {
     dispatch(createTransaction({ data, navigate }))
   }
   const valueOfMoney = [100000, 200000, 500000, 1000000, 2000000, 5000000]
   console.log(errors)
 
+  const handleClose = () => {
+    setOpen(false)
+  }
+
   return (
+    <>
     <div className='grid grid-cols-5 mb-10'>
         <div/>
         <div className='col-span-3 flex flex-col'>
@@ -57,12 +73,25 @@ export default function InternalTransfer () {
                     <div>
                         <TextField className='border-sky-500 border-2 w-full' id="outlined-basic" placeholder="Account number" variant="outlined" {...register('destination_account_number', { required: true })} onBlur={async (data) => {
                           dispatch(getDestinationAccount({ accountNumber: data.target.value }))
-                        }}/>
+                          dispatch(getReceiver({ accountNumber: data.target.value }))
+                        }}
+                        InputProps={{
+                          endAdornment:
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="receiver toggle"
+                              edge="end"
+                            >
+                              <PermContactCalendarIcon/>
+                            </IconButton>
+                          </InputAdornment>
+                        }}
+                        />
                         {errors.destination_account_number && <p className='text-red-500'>{errors.destination_account_number.message}</p>}
                     </div>
                     {destinationAccount
                       ? (
-                            <TextField className='border-sky-500 border-2' id="outlined-basic" placeholder="The recipient name"variant="outlined" value={destinationAccount?.username} disabled/>
+                            <TextField className='border-sky-500 border-2' id="outlined-basic" placeholder="The recipient name"variant="outlined" value={destinationAccount?.name} disabled/>
                         )
                       : (<></>)}
                     <FormControl>
@@ -97,5 +126,51 @@ export default function InternalTransfer () {
             </div>
         </div>
     </div>
+    <Dialog fullWidth={true} maxWidth={'xs'} sx={{ borderRadius: '30px' }} open={open} onClose={handleClose}>
+    <DialogTitle className='grid grid-cols-6 text-center text-white' bgcolor='primary.main' >
+      <div/>
+      <Typography className='text-center col-span-4' color='white'>Add Receiver</Typography>
+      <Button onClick={handleClose}><img src={Close} alt='Close'/></Button>
+    </DialogTitle>
+    {acceptCreate
+      ? <>
+        <DialogContent className='mt-3' sx={{ paddingTop: '15px !important' }}>
+          <form className='flex flex-col space-y-4' onSubmit={handleSubmit(onSubmit)}>
+            <TextField className='border-sky-500 border-2 w-full' id="outlined-basic" label="Account number" autoFocus variant="outlined" value={destinationAccount?.number} disabled/>
+            <TextField className='border-sky-500 border-2' id="outlined-basic" label="Name" autoFocus variant="outlined" value={receiverName} onChange={(e) => setReceiverName(e.target.value)}/>
+          </form>
+        </DialogContent>
+        <DialogActions sx={{ justifyContent: 'center' }}>
+          <Button className='w-4/5 h-12' color='primary' sx={{
+            borderRadius: '10px',
+            background: '#4D54E4',
+            '&:hover': {
+              background: '#2a2e80'
+            },
+            textTransform: 'none'
+          }}
+          onClick={() => {
+            dispatch(createReceiver({ name: receiverName }))
+            handleClose()
+          }}>
+            <Typography sx={{ fontSize: '18px' }} color='white'>Save</Typography>
+          </Button>
+        </DialogActions>
+      </>
+      : <>
+        <DialogContent className='mt-3'>
+          <Typography>Do you want to save this receiver?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={() => setAcceptCreate(true)}>
+            Agree
+          </Button>
+          <Button onClick={handleClose} autoFocus>
+            Cancel
+          </Button>
+        </DialogActions>
+      </>}
+  </Dialog>
+  </>
   )
 }
