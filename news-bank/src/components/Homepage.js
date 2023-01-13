@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from './Navbar/NavBarUser'
+import Navbar from './Navbar/NavBar'
 import QuickUtilityUser from './QuickUtility/QuickUtilityUser'
 import QuickUtilityEmployee from './QuickUtility/QuickUtilityEmployee'
 import SideBarUser from './Sidebar/SideBarUser' 
