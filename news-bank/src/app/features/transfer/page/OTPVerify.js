@@ -4,12 +4,11 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import OtpInput from 'react18-input-otp'
-import { parseJwt } from '../../../../utils.js'
 import { setTargetTransactionId, verifyOTP } from '../store/transferSlice.js'
 
 export default function OTPVerify () {
   const [otp, setOtp] = useState('')
-  const currentUser = parseJwt(localStorage.token)
+  const email = useSelector(state => state.login.email)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { id } = useParams()
@@ -22,7 +21,7 @@ export default function OTPVerify () {
   return (
       <div className='flex flex-col items-center justify-center space-y-5'>
         <Typography className='text-black' style={{ fontWeight: 600, fontSize: '24px' }}>Enter OTP</Typography>
-        <Typography className='text-black'>We Will send you a OTP code on this <strong>{currentUser.email}</strong></Typography>
+        <Typography className='text-black'>We Will send you a OTP code on this <strong>{email}</strong></Typography>
 
         <OtpInput
           value={otp}
