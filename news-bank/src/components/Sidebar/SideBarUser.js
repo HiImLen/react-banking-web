@@ -33,7 +33,7 @@ export default function SideBar () {
                     <img src={DebtReminderManagement} alt='DebtReminderManagement'></img>
                     <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Debt Reminder Management</Typography>
                 </Link>
-                <Link to='/debt' style={{ textDecoration: 'none' }}>
+                <Link to='/recentTransaction' style={{ textDecoration: 'none' }}>
                     <div className='flex flex-row justify-left items-center ml-3 gap-x-2'>
                         <img src={RecentTransSidebar} alt='RecentTransSidebar'></img>
                         <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Recent Transactions</Typography>
