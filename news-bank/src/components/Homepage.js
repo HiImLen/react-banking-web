@@ -4,7 +4,7 @@ import QuickUtilityUser from './QuickUtility/QuickUtilityUser'
 import QuickUtilityEmployee from './QuickUtility/QuickUtilityEmployee'
 import SideBarUser from './Sidebar/SideBarUser' 
 import SideBarAdmin from './Sidebar/SideBarAdmin'
-import SideBarEmployee from  './Sidebar/SideBarAdmin'
+import SideBarEmployee from  './Sidebar/SideBarEmployee'
 
 export default function Homepage ({ child }) {
     const roleID = parseInt(localStorage.role_id);

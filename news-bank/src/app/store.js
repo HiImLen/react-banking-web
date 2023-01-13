@@ -8,6 +8,7 @@ export default configureStore({
   reducer: {
     transfer: transferReducer,
     debt: debtReducer,
-    debtTranscript: debtTranscriptReducer
+    debtTranscript: debtTranscriptReducer,
+    login: loginReducer
   }
 })

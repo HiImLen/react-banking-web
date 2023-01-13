@@ -9,7 +9,7 @@ const instance = axios.create({
 
 instance.interceptors.response.use((response) => {
   return response
-}, (err) => {
+}, async (err) => {
   console.log(err.response.config.url)
   console.log('err', err)
   if (err.response.status !== 401) {
@@ -31,12 +31,11 @@ instance.interceptors.response.use((response) => {
     })
   }
   console.log('abc')
-  return instance.post('/RefreshToken/Refresh', { refreshToken: localStorage.refreshToken }, { withCrendentials: true }).then((success) => {
-    const config = err.response.config
-    config.headers['x-access-token'] = success.data.data.token
-    localStorage.token = success.data.data.token
-    return instance(config)
-  })
+  const success = await instance.post('/RefreshToken/Refresh', { refreshToken: localStorage.refreshToken }, { withCrendentials: true })
+  const config = err.response.config
+  config.headers['x-access-token'] = success.data.data.token
+  localStorage.token = success.data.data.token
+  return await instance(config)
 })
 
 export { instance }
