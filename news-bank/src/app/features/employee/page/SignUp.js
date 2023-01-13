@@ -10,7 +10,6 @@ export default function SignUp () {
   const location = useLocation()
 
   const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm()
-  const token = useSelector((state) => state.login.token)
   const role_id = useSelector((state) => state.login.role_id)
 
   useEffect(() => {
@@ -19,7 +18,7 @@ export default function SignUp () {
 
   const IsEmployee = () => {
     const roleID = parseInt(role_id)
-    if (roleID === 2 || !token) {
+    if (roleID === 2 || !localStorage.token) {
       nagivate('/')
     }
   }

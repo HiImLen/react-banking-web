@@ -9,8 +9,7 @@ import { verifyOTP } from '../store/debtSlice.js'
 
 export default function OTPVerify () {
   const [otp, setOtp] = useState('')
-  const token = useSelector((state) => state.login.token)
-  const currentUser = parseJwt(token)
+  const currentUser = parseJwt(localStorage.token)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 

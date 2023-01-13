@@ -12,7 +12,6 @@ export default function Forgot () {
 
   const [isReset, setIsReset] = useState(false)
   const [email, setEmail] = useState('')
-  const token = useSelector((state) => state.login.token)
 
   useEffect(() => {
     LoggedIn()
@@ -31,7 +30,7 @@ export default function Forgot () {
   }
 
   const LoggedIn = () => {
-    if (token) {
+    if (localStorage.token) {
       nagivate('/')
     }
   }

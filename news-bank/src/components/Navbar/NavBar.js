@@ -10,14 +10,16 @@ import avt from '../../assets/img/avt.svg'
 import signout from '../../assets/img/signout.svg'
 import { clearLoginInfo } from '../../slice/loginSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { parseJwt } from '../../utils'
 
 export default function NavBar () {
   const [anchorEl, setAnchorEl] = useState(null)
   const [anchorEl2, setAnchorEl2] = useState(null)
   const open = Boolean(anchorEl)
   const open2 = Boolean(anchorEl2)
+  //const name = useSelector((state) => state.login.name)
+  const name = parseJwt(localStorage.token).name
   const dispatch = useDispatch()
-  const name = useSelector((state) => state.login.name)
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }

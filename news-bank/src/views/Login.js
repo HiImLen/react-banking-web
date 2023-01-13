@@ -16,14 +16,13 @@ export default function Login () {
 
   const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm()
   const [capValue, setCapValue] = useState('')
-  const token = useSelector((state) => state.login.token)
 
   useEffect(() => {
     LoggedIn()
   })
 
   const LoggedIn = () => {
-    if (token) {
+    if (localStorage.token) {
       nagivate('/')
     }
   }
@@ -51,8 +50,6 @@ export default function Login () {
         localStorage.setItem('refreshToken', res.data.data.refreshToken)
         const token = parseJwt(res.data.data.token)
         const data = {
-          token: res.data.data.token,
-          refreshToken: res.data.data.refreshToken,
           username: token.username,
           email: token.email,
           phone: token.phone,
