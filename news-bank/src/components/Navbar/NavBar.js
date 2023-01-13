@@ -17,8 +17,7 @@ export default function NavBar () {
   const [anchorEl2, setAnchorEl2] = useState(null)
   const open = Boolean(anchorEl)
   const open2 = Boolean(anchorEl2)
-  //const name = useSelector((state) => state.login.name)
-  const name = parseJwt(localStorage.token).name
+  const name = useSelector((state) => state.login.name)
   const dispatch = useDispatch()
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)

@@ -9,9 +9,9 @@ import { useSelector } from 'react-redux'
 import { instance, parseJwt } from '../../utils'
 
 export default function HomepageCP() {
-    //const name = useSelector((state) => state.login.name)
-    const name = parseJwt(localStorage.token).name
+    const name = useSelector((state) => state.login.name)
     const [accountInfo, setAccountInfo] = useState({})
+    const [balance, setBalance] = useState(0)
 
     useEffect(() => {
         getAccountInformation();
@@ -21,7 +21,13 @@ export default function HomepageCP() {
         const res = await instance.get('/Users/Accounts')
         if (res.status === 200) {
             setAccountInfo(res.data.data)
+            setBalance(formatMoney(res.data.data.balance))
         }
+    }
+
+    // function to format money as VND
+    const formatMoney = (money) => {
+        return money.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
     
     return (
@@ -59,7 +65,7 @@ export default function HomepageCP() {
                         <div className="grid grid-cols-2 content-center py-3">
                             <div className="flex flex-col">
                                 <Typography>Balance</Typography>
-                                <Typography className='text-black' style={{ fontWeight: 600 }}>{accountInfo.balance} VND</Typography>
+                                <Typography className='text-black' style={{ fontWeight: 600 }}>{balance} VND</Typography>
                             </div>
                             <div className="flex flex-col">
                                 <Typography>Account number</Typography>
