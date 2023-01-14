@@ -111,18 +111,6 @@ export default function HomepageCP() {
                         </Button>
                     </div>
                 </Link>
-                {role_id === 1 ? (
-                    <Link to='/admin' style={{ textDecoration: 'none' }}>
-                        <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
-                            <Button className="flex flex-grow">
-                                <div className="flex flex-grow flex-col items-center gap-y-2">
-                                    <div style={{ height: '59px', width: '59px' }}><img src={DebtReminder} alt='DebtReminder' /></div>
-                                    <Typography className='text-black' style={{ textTransform: 'none' }}>Admin Management</Typography>
-                                </div>
-                            </Button>
-                        </div>
-                    </Link>
-                ) : <></>}
                 {role_id !== 1 ? (
                     <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
                         <Button className="flex flex-grow">

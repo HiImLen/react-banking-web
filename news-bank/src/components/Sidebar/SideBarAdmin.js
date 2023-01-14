@@ -23,13 +23,13 @@ export default function SideBarAdmin () {
                         <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Home</Typography>
                     </div>
                 </Link>
-                <Link to='/transfer' style={{ textDecoration: 'none' }}>
+                <Link to='/admin/employees' style={{ textDecoration: 'none' }}>
                     <div className='flex flex-row justify-start items-center ml-3 gap-x-2'>
                         <img src={FundTransferSidebar} alt='FundTransferSidebar'></img>
                         <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Employee Manager</Typography>
                     </div>
                 </Link>
-                <Link to='/debt' className='flex flex-row justify-center items-center ml-3 gap-x-2' style={{ textDecoration: 'none' }}>
+                <Link to='admin/transactions' className='flex flex-row justify-center items-center ml-3 gap-x-2' style={{ textDecoration: 'none' }}>
                     <img src={DebtReminderManagement} alt='DebtReminderManagement'></img>
                     <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Transactions With Other Banks</Typography>
                 </Link>

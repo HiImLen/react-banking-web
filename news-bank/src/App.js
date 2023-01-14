@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 // import { createTheme } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material'
-import Admin from './app/features/admin/page/Admin.js'
+import EmployeeManager from './app/features/admin/page/EmployeeManager.js'
 import CreateDebt from './app/features/debit/page/CreateDebt.js'
 import DebtReminder from './app/features/debit/page/DebtReminder.js'
 import DebtReminderManagement from './app/features/debit/page/DebtReminderManagement.js'
@@ -19,6 +19,7 @@ import HomepageCP from './components/Homepage/HomepageCP.js'
 import Bank from './views/Bank.js'
 import Forgot from './views/Forgot.js'
 import Login from './views/Login.js'
+import TransactionsManager from './app/features/admin/page/TransactionsManager.js'
 
 const theme = createTheme({
   palette: {
@@ -57,7 +58,7 @@ const App = () => {
           <Route index element={<HomepageCP />} />
           <Route path="transfer" element={<FundTransfer />} />
           <Route exact path="transfer/inter" element={<InternalTransfer />} />
-          <Route exact path="transfer/external" element={<ExternalTransfer/>} />
+          <Route exact path="transfer/external" element={<ExternalTransfer />} />
           <Route exact path="debt" element={<DebtReminder />} />
           <Route exact path="debt/createDebtReminder" element={<CreateDebt />} />
           <Route exact path="debt/debtReminderManagement" element={<DebtReminderManagement />} />
@@ -67,7 +68,8 @@ const App = () => {
           <Route path='transaction/:id/script' element={<Transaction />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="recent" element={<RecentTransactionEmployee />} />
-          <Route path="admin" element={<Admin />} />
+          <Route exact path="admin/employees" element={<EmployeeManager />} />
+          <Route exact path="admin/transactions" element={<TransactionsManager />} />
         </Route>
       </Routes>
     </ThemeProvider>

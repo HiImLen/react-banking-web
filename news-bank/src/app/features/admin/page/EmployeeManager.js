@@ -16,7 +16,7 @@ import { getEmployeeList, deleteEmployee, createEmployee } from '../store/adminS
 import { useForm } from 'react-hook-form'
 
 
-export default function Admin() {
+export default function EmployeeManager() {
   const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm()
   const dispatch = useDispatch()
 
