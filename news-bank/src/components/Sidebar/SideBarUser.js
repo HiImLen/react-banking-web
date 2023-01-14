@@ -39,6 +39,12 @@ export default function SideBar () {
                         <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Recent Transactions</Typography>
                     </div>
                 </Link>
+                <Link to='/close' style={{ textDecoration: 'none' }}>
+                    <div className='flex flex-row justify-left items-center ml-3 gap-x-2'>
+                        <img src={RecentTransSidebar} alt='RecentTransSidebar'></img>
+                        <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Close Account</Typography>
+                    </div>
+                </Link>
             </Box>
         </Paper>
   )

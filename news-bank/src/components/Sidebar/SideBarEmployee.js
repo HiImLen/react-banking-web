@@ -33,6 +33,10 @@ export default function SideBarEmployee () {
                     <img src={DebtReminderManagement} alt='DebtReminderManagement'></img>
                     <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Deposit Money</Typography>
                 </Link>
+                <Link to='/close' className='flex flex-row ml-3 gap-x-2' style={{ textDecoration: 'none' }}>
+                    <img src={RecentTransSidebar} alt='DebtReminderManagement'></img>
+                    <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Lock Client Account</Typography>
+                </Link>
             </Box>
         </Paper>
   )

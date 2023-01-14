@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 import { instance } from '../../../../utils.js'
 
-export default function SignUp () {
+export default function SignUp() {
   const nagivate = useNavigate()
   const location = useLocation()
 
@@ -56,6 +56,11 @@ export default function SignUp () {
       }
       return
     }
+    // user name can't have space
+    if (data.username && data.username.match(/\s/)) {
+      setError('username', { type: 'manual', message: 'Username cannot have space.' })
+      return
+    }
     if (!data.name || !data.username || !data.email || !data.phone || !data.password || !data.password_repeat) {
       return
     }
@@ -97,50 +102,50 @@ export default function SignUp () {
   }
 
   return (
-        <div className="container">
-            <div className="card shadow-lg o-hidden border-0 my-5">
-                <div className="card-body p-0">
-                    <div className="row">
-                            <div className="p-5">
-                                <div className="text-center">
-                                    <h4 className="text-dark mb-4">Create an Account!</h4>
-                                </div>
-                                <form className="user" onSubmit={handleSubmit(onSubmit)}>
-                                    <div className="mb-3">
-                                        <input className="form-control form-control-user" type="text" id="exampleName" placeholder="Full Name" name="name" autoFocus {...register('name')} />
-                                        {errors.name && <span className="error-message text-danger">{errors.name.message}</span>}
-                                    </div>
-                                    <div className="mb-3">
-                                        <input className="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Address" name="email" autoFocus {...register('email')} />
-                                        {errors.email && <span className="error-message text-danger">{errors.email.message}</span>}
-                                    </div>
-                                    <div className="mb-3">
-                                        <input className="form-control form-control-user" type="text" id="examplePhone" placeholder="Phone Number" name="phone" autoFocus {...register('phone')} />
-                                        {errors.phone && <span className="error-message text-danger">{errors.phone.message}</span>}
-                                    </div>
-                                    <div className="mb-3">
-                                        <input className="form-control form-control-user" type="text" id="exampleUserName" placeholder="Username" name="username" autoFocus {...register('username')} />
-                                        {errors.username && <span className="error-message text-danger">{errors.username.message}</span>}
-                                    </div>
-                                    <div className="row mb-3">
-                                        <div className="col-sm-6 mb-3 mb-sm-0">
-                                            <input className="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" name="password" autoFocus {...register('password')} />
-                                            {errors.password && <span className="error-message text-danger">{errors.password.message}</span>}
-                                        </div>
-                                        <div className="col-sm-6 mb-3">
-                                            <input className="form-control form-control-user" type="password" id="exampleRepeatPasswordInput" placeholder="Repeat Password" name="password_repeat" autoFocus {...register('password_repeat')} />
-                                            {errors.password_repeat && <span className="error-message text-danger">{errors.password_repeat.message}</span>}
-                                        </div>
-                                    </div>
-                                    <div className="d-flex justify-content-center">
-                                        {errors.error && <span className="error-message mb-3 text-danger">{errors.error.message}</span>}
-                                    </div>
-                                    <button className="btn btn-primary d-block btn-user w-100" type="submit" onClick={onReset}>Register Account</button>
-                                </form>
-                            </div>
-                    </div>
+    <div className="container">
+      <div className="card shadow-lg o-hidden border-0 my-5">
+        <div className="card-body p-0">
+          <div className="row">
+            <div className="p-5">
+              <div className="text-center">
+                <h4 className="text-dark mb-4">Create an Account!</h4>
+              </div>
+              <form className="user" onSubmit={handleSubmit(onSubmit)}>
+                <div className="mb-3">
+                  <input className="form-control form-control-user" type="text" id="exampleName" placeholder="Full Name" name="name" autoFocus {...register('name')} />
+                  {errors.name && <span className="error-message text-danger">{errors.name.message}</span>}
                 </div>
+                <div className="mb-3">
+                  <input className="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Address" name="email" autoFocus {...register('email')} />
+                  {errors.email && <span className="error-message text-danger">{errors.email.message}</span>}
+                </div>
+                <div className="mb-3">
+                  <input className="form-control form-control-user" type="text" id="examplePhone" placeholder="Phone Number" name="phone" autoFocus {...register('phone')} />
+                  {errors.phone && <span className="error-message text-danger">{errors.phone.message}</span>}
+                </div>
+                <div className="mb-3">
+                  <input className="form-control form-control-user" type="text" id="exampleUserName" placeholder="Username" name="username" autoFocus {...register('username')} />
+                  {errors.username && <span className="error-message text-danger">{errors.username.message}</span>}
+                </div>
+                <div className="row mb-3">
+                  <div className="col-sm-6 mb-3 mb-sm-0">
+                    <input className="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" name="password" autoFocus {...register('password')} />
+                    {errors.password && <span className="error-message text-danger">{errors.password.message}</span>}
+                  </div>
+                  <div className="col-sm-6 mb-3">
+                    <input className="form-control form-control-user" type="password" id="exampleRepeatPasswordInput" placeholder="Repeat Password" name="password_repeat" autoFocus {...register('password_repeat')} />
+                    {errors.password_repeat && <span className="error-message text-danger">{errors.password_repeat.message}</span>}
+                  </div>
+                </div>
+                <div className="d-flex justify-content-center">
+                  {errors.error && <span className="error-message mb-3 text-danger">{errors.error.message}</span>}
+                </div>
+                <button className="btn btn-primary d-block btn-user w-100" type="submit" onClick={onReset}>Register Account</button>
+              </form>
             </div>
+          </div>
         </div>
+      </div>
+    </div>
   )
 }
