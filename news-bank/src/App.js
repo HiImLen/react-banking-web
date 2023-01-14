@@ -17,6 +17,8 @@ import Bank from './views/Bank.js'
 import Forgot from './views/Forgot.js'
 import Login from './views/Login.js'
 import SignUp from './app/features/employee/page/SignUp.js'
+import SignUp from './views/SignUp.js'
+import Admin from './app/features/admin/page/Admin.js'
 
 const theme = createTheme({
   palette: {
@@ -64,6 +66,7 @@ const App = () => {
           <Route path='transaction/:id/script' element={<Transaction />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="recent" element={<RecentTransactionEmployee />} />
+          <Route path="admin" element={<Admin />} />
         </Route>
       </Routes>
     </ThemeProvider>
