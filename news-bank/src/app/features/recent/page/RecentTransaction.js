@@ -88,7 +88,10 @@ export default function RecentTransaction () {
                 {listTransaction.map((transaction) => {
                   const m = new Date(transaction.created_at)
                   m.setHours(m.getHours() + 7)
-                  return (<TableRow key={transaction.id}>
+                  let bgColor = "#FFFFFF"
+                  if (transaction.destination_bank_id !== 1 || transaction.source_bank_id !== 1) 
+                    bgColor = "#EAFDFC"
+                  return (<TableRow key={transaction.id} sx={{background: bgColor}}>
                     <TableCell>{transaction.destination_owner_name}</TableCell>
                     <TableCell>
                       <Typography>{moment(m).format('LL')}</Typography>

@@ -12,10 +12,6 @@ instance.interceptors.request.use((config) => {
   return config
 })
 
-export const updateToken = (newToken) => {
-  instance.defaults.headers.common['x-access-token'] = newToken;
-};
-
 instance.interceptors.response.use((response) => {
   return response
 }, async (err) => {
