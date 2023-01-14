@@ -10,6 +10,7 @@ import avt from '../../assets/img/avt.svg'
 import signout from '../../assets/img/signout.svg'
 import { clearLoginInfo } from '../../app/features/login/store/loginSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { updateToken } from '../../utils'
 
 export default function NavBar () {
   const [anchorEl, setAnchorEl] = useState(null)
@@ -35,6 +36,7 @@ export default function NavBar () {
     localStorage.removeItem('token')
     localStorage.removeItem('refreshToken')
     dispatch(clearLoginInfo())
+    updateToken('')
     nagivate('/login')
     handleClose()
   }

@@ -7,6 +7,10 @@ const instance = axios.create({
   headers: { 'x-access-token': localStorage.token }
 })
 
+export const updateToken = (newToken) => {
+  instance.defaults.headers.common['x-access-token'] = newToken;
+};
+
 instance.interceptors.response.use((response) => {
   return response
 }, async (err) => {

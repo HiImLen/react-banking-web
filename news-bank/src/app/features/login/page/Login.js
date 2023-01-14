@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { setLoginInfo } from '../store/loginSlice'
 
 import imgLogin from '../../../../assets/img/login-img.jpeg'
-import { instance, parseJwt } from '../../../../utils.js'
+import { instance, parseJwt, updateToken } from '../../../../utils.js'
 
 
 export default function Login() {
@@ -68,6 +68,7 @@ export default function Login() {
             isSettingToken = false
           }
         }
+        updateToken(res.data.data.token)
         nagivate(retUrl)
       }
     } catch (error) {
