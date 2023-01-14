@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { instance, parseJwt } from '../../../../utils.js'
+import { setLoginInfo } from '../../login/store/loginSlice.js'
 
 export default function CloseAccount() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const location = useLocation()
   const role_id = parseInt(useSelector(state => state.login.role_id))
   const user_id = parseInt(useSelector(state => state.login.user_id))
@@ -31,7 +33,15 @@ export default function CloseAccount() {
         alert('Account closed successfully.')
         localStorage.removeItem('token')
         localStorage.removeItem('refreshToken')
-        dispatch(clearLoginInfo())
+        const data = {
+          user_id: null,
+          username: null,
+          email: null,
+          phone: null,
+          name: null,
+          role_id: null
+        }
+        dispatch(setLoginInfo(data))
         
         navigate('/login')
       }

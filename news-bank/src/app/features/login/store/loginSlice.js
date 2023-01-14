@@ -9,12 +9,6 @@ const initialState = {
   role_id: 0
 }
 
-export const clearLoginInfo = () => {
-  return (dispatch) => {
-    dispatch(setLoginInfo(initialState))
-  }
-}
-
 export const loginSlice = createSlice({
   name: 'login',
   initialState,

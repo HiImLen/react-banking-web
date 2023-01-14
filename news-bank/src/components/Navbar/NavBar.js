@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { clearLoginInfo } from '../../app/features/login/store/loginSlice'
+import { setLoginInfo } from '../../app/features/login/store/loginSlice'
 import DownArrow from '../../assets/icon/DownArrow.svg'
 import notification from '../../assets/icon/notification.svg'
 import avt from '../../assets/img/avt.svg'
@@ -34,7 +34,15 @@ export default function NavBar () {
   const handleLogout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('refreshToken')
-    dispatch(clearLoginInfo())
+    const data = {
+      user_id: null,
+      username: null,
+      email: null,
+      phone: null,
+      name: null,
+      role_id: null
+    }
+    dispatch(setLoginInfo(data))
     navigate('/login')
     handleClose()
   }
