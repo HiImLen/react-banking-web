@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { instance } from '../../../../utils.js'
 
 export default function Deposit() {
-  const nagivate = useNavigate()
+  const navigate = useNavigate()
   const location = useLocation()
   const role_id = parseInt(useSelector(state => state.login.role_id))
 
@@ -17,7 +17,7 @@ export default function Deposit() {
 
   const Access = () => {
     if (!localStorage.token || role_id === 2) {
-      nagivate('/')
+      navigate('/')
     }
   }
 
@@ -48,7 +48,7 @@ export default function Deposit() {
 
         // console.log(location.state);
         const retUrl = location.state?.from?.pathname || '/'
-        nagivate(retUrl)
+        navigate(retUrl)
       }
     } catch (error) {
       if (error.response) {

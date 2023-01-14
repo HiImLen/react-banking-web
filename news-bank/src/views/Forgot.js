@@ -7,7 +7,7 @@ import ResetPassword from '../components/Forgot/ResetPassword'
 import VerifyOTP from '../components/Forgot/VerifyOTP'
 
 export default function Forgot () {
-  const nagivate = useNavigate()
+  const navigate = useNavigate()
   // const location = useLocation();
 
   const [isReset, setIsReset] = useState(false)
@@ -31,7 +31,7 @@ export default function Forgot () {
 
   const LoggedIn = () => {
     if (localStorage.token) {
-      nagivate('/')
+      navigate('/')
     }
   }
 

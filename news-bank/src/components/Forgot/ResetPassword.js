@@ -19,7 +19,7 @@ export default function ResetPassword (props) {
         props.onResetPassword(true)
 
         // const retUrl = location.state?.from?.pathname || '/';
-        // nagivate(retUrl);
+        // navigate(retUrl);
       }
     } catch (error) {
       if (error.response) {

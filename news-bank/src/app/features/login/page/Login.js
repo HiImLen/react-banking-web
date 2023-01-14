@@ -11,7 +11,7 @@ import { instance, parseJwt } from '../../../../utils.js'
 
 export default function Login() {
   const dispatch = useDispatch()
-  const nagivate = useNavigate()
+  const navigate = useNavigate()
   const location = useLocation()
 
   const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm()
@@ -24,7 +24,7 @@ export default function Login() {
 
   const LoggedIn = () => {
     if (localStorage.token) {
-      nagivate('/')
+      navigate('/')
     }
   }
 
@@ -68,7 +68,7 @@ export default function Login() {
             isSettingToken = false
           }
         }
-        nagivate(retUrl)
+        navigate(retUrl)
       }
     } catch (error) {
       if (error.response) {

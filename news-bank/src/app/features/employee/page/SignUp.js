@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { instance } from '../../../../utils.js'
 
 export default function SignUp() {
-  const nagivate = useNavigate()
+  const navigate = useNavigate()
   const location = useLocation()
 
   const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm()
@@ -19,7 +19,7 @@ export default function SignUp() {
   const IsEmployee = () => {
     const roleID = parseInt(role_id)
     if (roleID !== 3 || !localStorage.token) {
-      nagivate('/')
+      navigate('/')
     }
   }
 
@@ -71,7 +71,7 @@ export default function SignUp() {
         alert('Account created successfully.')
         // console.log(location.state);
         const retUrl = location.state?.from?.pathname || '/'
-        nagivate(retUrl)
+        navigate(retUrl)
       }
     } catch (error) {
       if (error.response) {
