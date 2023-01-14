@@ -16,6 +16,7 @@ export default function Login() {
 
   const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm()
   const [capValue, setCapValue] = useState('')
+  let isSettingToken = true
 
   useEffect(() => {
     LoggedIn()
@@ -49,7 +50,9 @@ export default function Login() {
         localStorage.setItem('token', res.data.data.token)
         localStorage.setItem('refreshToken', res.data.data.refreshToken)
         const token = parseJwt(res.data.data.token)
+        console.log(token)
         const data = {
+          user_id: token.id,
           username: token.username,
           email: token.email,
           phone: token.phone,
@@ -60,6 +63,11 @@ export default function Login() {
 
         // console.log(location.state);
         const retUrl = location.state?.from?.pathname || '/'
+        while (isSettingToken) {
+          if (localStorage.getItem('token') !== null) {
+            isSettingToken = false
+          }
+        }
         nagivate(retUrl)
       }
     } catch (error) {

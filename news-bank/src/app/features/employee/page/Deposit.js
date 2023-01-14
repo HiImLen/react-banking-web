@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { instance, parseJwt } from '../../../../utils.js'
+import { useSelector } from 'react-redux'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { instance } from '../../../../utils.js'
 
-export default function InternalTransfer() {
-  const dispatch = useDispatch()
+export default function Deposit() {
   const nagivate = useNavigate()
   const location = useLocation()
   const role_id = parseInt(useSelector(state => state.login.role_id))
 
-  const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm()
+  const { register, handleSubmit, setError, formState: { errors } } = useForm()
 
   useEffect(() => {
     Access()
@@ -84,7 +83,7 @@ export default function InternalTransfer() {
               <div className="row">
                 <div className="p-5">
                   <div className="text-center">
-                    <h4 className="text-dark mb-4">Deposit for Client!</h4>
+                    <h4 className="text-dark mb-4">Deposit for Client</h4>
                   </div>
                   <form className="user" onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-3">

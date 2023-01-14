@@ -13,14 +13,12 @@ export default function HomepageCP() {
     const role_id = useSelector((state) => state.login.role_id)
     const name = useSelector((state) => state.login.name)
     const [accountInfo, setAccountInfo] = useState({})
-    const [balance, setBalance] = useState(0)
+    const [balance, setBalance] = useState('')
 
     useEffect(() => {
         if (role_id === 2) {
-        getAccountInformation().then((data) => {
-            setAccountInfo(data.accountInfo);
-            setBalance(data.balance);
-        });
+            console.log('role_id', role_id)
+            getAccountInformation()
         }
     }, []);
 
@@ -44,7 +42,7 @@ export default function HomepageCP() {
                 <div className="grid grid-rows-5 gap-y-14">
                     {/* Chi tiết thông tin card */}
                     <Paper
-                        className='row-span-3 grid grid-rows-6 py-3 px-5'
+                        className='row-span-4 grid grid-rows-6 py-3 px-5'
                         elevation={2}
                         sx={{ borderRadius: '10px' }}
                     >
@@ -97,7 +95,7 @@ export default function HomepageCP() {
                 elevation={2}
                 sx={{ borderRadius: '10px' }}
             >
-                <Link to={role_id === 1? "": role_id === 2? "transfer" : role_id === 3? "signup" : ""} style={{ textDecoration: 'none' }}>
+                <Link to={role_id === 1 ? "" : role_id === 2 ? "transfer" : role_id === 3 ? "signup" : ""} style={{ textDecoration: 'none' }}>
                     <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
                         <Button className="flex flex-grow">
                             <div className="flex flex-grow flex-col items-center gap-y-2">
@@ -107,7 +105,7 @@ export default function HomepageCP() {
                         </Button>
                     </div>
                 </Link>
-                <Link to={role_id === 1? "": role_id === 2? "debt" : role_id === 3? "deposit" : ""} style={{ textDecoration: 'none' }}>
+                <Link to={role_id === 1 ? "" : role_id === 2 ? "debt" : role_id === 3 ? "deposit" : ""} style={{ textDecoration: 'none' }}>
                     <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
                         <Button className="flex flex-grow">
                             <div className="flex flex-grow flex-col items-center gap-y-2">
@@ -117,16 +115,25 @@ export default function HomepageCP() {
                         </Button>
                     </div>
                 </Link>
-                {role_id === 1 || role_id === 3 ? <></> :  (
-                    <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
-                    <Button className="flex flex-grow">
-                        <div className="flex flex-grow flex-col items-center gap-y-2">
-                            <div style={{ height: '59px', width: '59px' }}><img src={RecentTrans} alt='RecentTrans' /></div>
-                            <Typography className='text-black' style={{ textTransform: 'none' }}>Recent Transactions</Typography>
-                        </div>
-                    </Button>
-                </div>
-                ) }
+                <Link to={role_id === 1 ? "" : role_id === 2 ? "" : role_id === 3 ? "lock" : ""} style={{ textDecoration: 'none' }}>
+                    {role_id === 1 ? <></> : role_id === 3 ? (
+                        <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
+                            <Button className="flex flex-grow">
+                                <div className="flex flex-grow flex-col items-center gap-y-2">
+                                    <div style={{ height: '59px', width: '59px' }}><img src={RecentTrans} alt='RecentTrans' /></div>
+                                    <Typography className='text-black' style={{ textTransform: 'none' }}>Lock Client Account</Typography>
+                                </div>
+                            </Button>
+                        </div>) : (
+                        <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
+                            <Button className="flex flex-grow">
+                                <div className="flex flex-grow flex-col items-center gap-y-2">
+                                    <div style={{ height: '59px', width: '59px' }}><img src={RecentTrans} alt='RecentTrans' /></div>
+                                    <Typography className='text-black' style={{ textTransform: 'none' }}>Recent Transactions</Typography>
+                                </div>
+                            </Button>
+                        </div>)}
+                </Link>
             </Paper>
         </>
     )
