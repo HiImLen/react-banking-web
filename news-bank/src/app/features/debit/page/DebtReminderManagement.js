@@ -141,7 +141,62 @@ export default function DebtReminderManagement () {
             />
         </Paper>
       {/* Detail debt dialog */}
-      
+      <Dialog fullWidth={true} maxWidth={'xs'} sx={{ borderRadius: '30px' }} open={open} onClose={handleClose}>
+        <DialogTitle className='grid grid-cols-6 text-center text-white' bgcolor='primary.main' >
+          <div/>
+          <Typography className='text-center col-span-4' color='white'>Debt Details</Typography>
+          <Button onClick={handleClose}><img src={Close} alt='Close'/></Button>
+        </DialogTitle>
+        <DialogContent className='mt-3'>
+          <Typography className='text-center' color='primary'>Amount</Typography>
+          <Typography className='text-center mb-3' sx={{ fontSize: '24px' }} color='black'>{targetDebt?.amount?.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</Typography>
+        <Divider sx={{ border: '1px solid #ADAEB5' }} />
+        <Box className='flex flex-col justify-center space-y-3 py-4'>
+          <Typography sx={{ fontSize: '14px' }} color='grey'> From</Typography>
+          <Typography sx={{ fontSize: '16px', fontWeight: '600', textTransform: 'uppercase' }} color='black'>{targetDebt?.source_owner_name}</Typography>
+          <Typography sx={{ fontSize: '14px' }} color='black'>{targetDebt?.source_account_number}</Typography>
+        </Box>
+        <Divider sx={{ border: '1px solid #ADAEB5' }} />
+        <Box className='flex flex-col justify-center space-y-3 py-4'>
+          <Typography sx={{ fontSize: '14px' }} color='grey'> To</Typography>
+          <Typography sx={{ fontSize: '16px', fontWeight: '600', textTransform: 'uppercase' }} color='black'>{targetDebt?.destination_owner_name}</Typography>
+          <Typography sx={{ fontSize: '14px' }} color='black'>{targetDebt?.destination_account_number}</Typography>
+        </Box>
+        <Divider sx={{ border: '1px solid #ADAEB5' }} />
+        <Box className='flex flex-col justify-center space-y-3 py-4'>
+          <Typography sx={{ fontSize: '14px' }} color='grey'> Description</Typography>
+          <Typography sx={{ fontSize: '14px' }} color='black'>{targetDebt?.note}</Typography>
+        </Box>
+        <Divider sx={{ border: '1px solid #ADAEB5' }} />
+        <Box className='grid grid-rows-3 gap-y-3 py-4'>
+          <div className='flex flex-row justify-between'>
+            <Typography sx={{ fontSize: '14px' }} color='grey'>Date</Typography>
+            <Typography sx={{ fontSize: '14px' }} color='black'>{dateString}</Typography>
+          </div>
+          <div className='flex flex-row justify-between'>
+            <Typography sx={{ fontSize: '14px' }} color='grey'>Status</Typography>
+            <Typography sx={{ fontSize: '14px' }} color='black'>{targetDebt?.isPaid ? 'Paid' : 'Unpaid'}</Typography>
+          </div>
+        </Box>
+        </DialogContent>
+        <DialogActions sx={{ justifyContent: 'center' }}>
+        {((targetDebt?.source_account_number !== sourceAccount?.number) && !targetDebt?.isPaid)
+          ? (
+          <Button className='w-4/5 h-12' color='primary' sx={{
+            borderRadius: '10px',
+            background: '#4D54E4',
+            '&:hover': {
+              background: '#2a2e80'
+            },
+            textTransform: 'none'
+          }}
+          onClick={() => navigate(`/debt/${targetDebt.id}/pay`)}
+          >
+            <Typography sx={{ fontSize: '18px' }} color='white'>Payment</Typography>
+          </Button>)
+          : (<></>)}
+        </DialogActions>
+      </Dialog>
     </Paper>
   )
 }
