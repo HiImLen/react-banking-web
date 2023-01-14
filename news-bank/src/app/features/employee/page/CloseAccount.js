@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { instance, parseJwt } from '../../../../utils.js'
 
 export default function CloseAccount() {
-  const nagivate = useNavigate()
+  const navigate = useNavigate()
   const location = useLocation()
   const role_id = parseInt(useSelector(state => state.login.role_id))
   const user_id = parseInt(useSelector(state => state.login.user_id))
@@ -18,7 +18,7 @@ export default function CloseAccount() {
 
   const Access = () => {
     if (!localStorage.token || role_id === 1) {
-      nagivate('/')
+      navigate('/')
     }
   }
 
@@ -33,7 +33,7 @@ export default function CloseAccount() {
         localStorage.removeItem('refreshToken')
         dispatch(clearLoginInfo())
         
-        nagivate('/login')
+        navigate('/login')
       }
     } catch (error) {
       if (error.response) {
@@ -70,7 +70,7 @@ export default function CloseAccount() {
             alert('Account closed successfully.')
 
             const retUrl = location.state?.from?.pathname || '/'
-            nagivate(retUrl)
+            navigate(retUrl)
           }
         } catch (error) {
           if (error.response) {

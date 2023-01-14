@@ -24,7 +24,7 @@ export default function NavBar () {
   const handleClick2 = (event) => {
     setAnchorEl2(event.currentTarget)
   }
-  const nagivate = useNavigate()
+  const navigate = useNavigate()
   const handleClose = () => {
     setAnchorEl(null)
   }
@@ -35,7 +35,7 @@ export default function NavBar () {
     localStorage.removeItem('token')
     localStorage.removeItem('refreshToken')
     dispatch(clearLoginInfo())
-    nagivate('/login')
+    navigate('/login')
     handleClose()
   }
 

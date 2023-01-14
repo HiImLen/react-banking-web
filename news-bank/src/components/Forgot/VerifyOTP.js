@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { instance } from '../../utils.js'
 
 export default function VerifyOTP (props) {
-  const nagivate = useNavigate()
+  const navigate = useNavigate()
   const location = useLocation()
   const { register, handleSubmit, setError, clearErrors, formState: { errors } } = useForm()
 
@@ -36,7 +36,7 @@ export default function VerifyOTP (props) {
         alert('Reset password successfully. You can now login with your new password!')
 
         const retUrl = location.state?.from?.pathname || '/'
-        nagivate(retUrl)
+        navigate(retUrl)
       }
     } catch (error) {
       if (error.response) {
