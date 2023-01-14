@@ -7,52 +7,38 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Title from './Title';
 
-// Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router'
+import { getEmployeeList } from '../store/adminSlice';
+import { instance } from '../../../../utils'
 
-const rows = [
-  createData(
-    0,
-    '16 Mar, 2019',
-    'Elvis Presley',
-    'Tupelo, MS',
-    'VISA ⠀•••• 3719',
-    312.44,
-  ),
-  createData(
-    1,
-    '16 Mar, 2019',
-    'Paul McCartney',
-    'London, UK',
-    'VISA ⠀•••• 2574',
-    866.99,
-  ),
-  createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-  createData(
-    3,
-    '16 Mar, 2019',
-    'Michael Jackson',
-    'Gary, IN',
-    'AMEX ⠀•••• 2000',
-    654.39,
-  ),
-  createData(
-    4,
-    '15 Mar, 2019',
-    'Bruce Springsteen',
-    'Long Branch, NJ',
-    'VISA ⠀•••• 5919',
-    212.79,
-  ),
-];
+export default function Admin() {
+  const [rows, setRows] = React.useState([]);
 
-function preventDefault(event) {
-  event.preventDefault();
-}
+  // const { id, status } = useParams()
+  // const dispatch = useDispatch()
 
-export default function Orders() {
+  
+  // useEffect(() => {
+  //   dispatch(getEmployeeList())
+  // }, [])
+  
+  // const employeeList = useSelector((state) => state.admin.employeeList)
+  const employeeList = []
+  try {
+    const res = instance.get('/Users/Employees')
+    console.log("employee list: " ,res)
+    if (res.data.status === 'success') {
+      employeeList = res.data.data
+    }
+  } catch (err) {
+    console.log(err)
+  }
+
+  console.log("employeeList in Admin.js: ", employeeList);
+
+
   return (
     <React.Fragment>
       <Title>All Employees</Title>
@@ -65,11 +51,11 @@ export default function Orders() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
+          {employeeList.map(() => (
+            <TableRow key={employeeList.id}>
+              <TableCell>{employeeList.id}</TableCell>
+              <TableCell>{employeeList.username}</TableCell>
+              <TableCell>{employeeList.name}</TableCell>
             </TableRow>
           ))}
         </TableBody>
