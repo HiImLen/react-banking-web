@@ -66,6 +66,7 @@ const App = () => {
           <Route path='transaction/:id/script' element={<Transaction />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="recent" element={<RecentTransactionEmployee />} />
+          <Route path="admin" element={<Admin />} />
         </Route>
       </Routes>
     </ThemeProvider>

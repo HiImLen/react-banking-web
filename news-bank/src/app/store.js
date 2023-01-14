@@ -6,12 +6,14 @@ import debtReducer from './features/debit/store/debtSlice.js'
 import debtTranscriptReducer from './features/debit/store/debtTranscriptSlice.js'
 import transferReducer from './features/transfer/store/transferSlice.js'
 import loginReducer from '../slice/loginSlice.js'
+import adminReducer from './features/admin/store/adminSlice.js'
 
 export const rootReducer = combineReducers({
   transfer: transferReducer,
   debt: debtReducer,
   debtTranscript: debtTranscriptReducer,
-  login: loginReducer
+  login: loginReducer,
+  admin: adminReducer
 });
 
 const persistConfig = {
