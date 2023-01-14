@@ -8,25 +8,28 @@ import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import Close from '../../../../assets/icon/Close.svg'
-import { createReceiver, createTransaction, getDestinationAccount, getReceiver, getSourceAccount } from '../store/transferSlice'
+import { createReceiver, createTransaction, fetchReceiver, getDestinationAccount, getReceiver, getSourceAccount } from '../store/transferSlice'
 
 export default function InternalTransfer () {
   const { register, handleSubmit, setValue, setError, clearErrors, formState: { errors } } = useForm()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
+  const [openReceiver, setOpenReceiver] = useState(false)
   const [acceptCreate, setAcceptCreate] = useState(false)
   const [receiverName, setReceiverName] = useState('')
 
   const sourceAccount = useSelector((state) => state.transfer.sourceAccount)
   const destinationAccount = useSelector((state) => state.transfer.destinationAccount)
   const receiver = useSelector((state) => state.transfer.receiver)
+  const listReceiver = useSelector((state) => state.transfer.listReceiver)
+  console.log("listReceiver", listReceiver)
 
   useEffect(() => {
     dispatch(getSourceAccount())
+    dispatch(fetchReceiver())
   }, [])
   useEffect(() => {
-    console.log(destinationAccount)
     if (destinationAccount) {
       clearErrors('destination_account_number')
     } else {
@@ -36,7 +39,6 @@ export default function InternalTransfer () {
   }, [destinationAccount])
 
   useEffect(() => {
-    console.log('fetch receiver', receiver)
     if (!receiver) setOpen(true)
   }, [receiver])
 
@@ -81,6 +83,7 @@ export default function InternalTransfer () {
                             <IconButton
                               aria-label="receiver toggle"
                               edge="end"
+                              onClick={() => setOpenReceiver(true)}
                             >
                               <PermContactCalendarIcon/>
                             </IconButton>
@@ -170,6 +173,34 @@ export default function InternalTransfer () {
           </Button>
         </DialogActions>
       </>}
+  </Dialog>
+  <Dialog fullWidth={true} maxWidth={'xs'} sx={{ borderRadius: '30px' }} open={openReceiver} onClose={handleClose}>
+    <DialogTitle className='grid grid-cols-6 text-center text-white' bgcolor='primary.main' >
+      <div/>
+      <Typography className='text-center col-span-4' color='white'>Receiver</Typography>
+      <Button onClick={handleClose}><img src={Close} alt='Close'/></Button>
+    </DialogTitle>
+        <DialogContent className='mt-3' sx={{ paddingTop: '15px !important' }}>
+          {listReceiver.map((receiver) => 
+            <Button className='flex flex-col w-full' onClick={() => 
+            {
+              dispatch(getDestinationAccount({accountNumber: receiver.account_number}))
+              setOpenReceiver(false)
+              setValue("destination_account_number", receiver.account_number)
+            }}
+            sx={{
+              justifyContent: "start",
+              alignItems: "left"
+            }}
+            >
+              <Typography>Reminiscent name: {receiver.reminiscent_name}</Typography>
+              <Typography>Number: {receiver.account_number}</Typography>
+            </Button>
+          )}
+        </DialogContent>
+        <DialogActions sx={{ justifyContent: 'center' }}>
+          
+        </DialogActions>
   </Dialog>
   </>
   )

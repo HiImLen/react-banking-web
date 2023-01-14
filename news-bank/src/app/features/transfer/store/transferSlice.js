@@ -7,7 +7,8 @@ const initialState = {
   status: true,
   targetTransactionId: null,
   transaction: null,
-  receiver: {}
+  receiver: {},
+  listReceiver: []
 }
 
 export const getSourceAccount = createAsyncThunk(
@@ -119,6 +120,18 @@ export const createReceiver = createAsyncThunk(
   }
 )
 
+export const fetchReceiver = createAsyncThunk(
+  'transfer/fetchReceiver',
+  async (params, {dispatch, getState}) => {
+    try{
+      const res = await instance.get('/Receivers')
+      if (res.status === 200 && res.data.status === 'success') dispatch(setListReceiver(res.data.data))
+    }catch(err){
+      console.log(err)
+    }
+  }
+)
+
 export const transferSlice = createSlice({
   name: 'transfer',
   initialState,
@@ -140,9 +153,12 @@ export const transferSlice = createSlice({
     },
     setReceiver: (state, action) => {
       state.receiver = action.payload
+    },
+    setListReceiver: (state, action) => {
+      state.listReceiver = action.payload
     }
   }
 })
 
-export const { setSourceAccount, setDestinationAccount, setStatus, setTargetTransactionId, setTransaction, setReceiver } = transferSlice.actions
+export const { setSourceAccount, setDestinationAccount, setStatus, setTargetTransactionId, setTransaction, setReceiver,setListReceiver } = transferSlice.actions
 export default transferSlice.reducer
