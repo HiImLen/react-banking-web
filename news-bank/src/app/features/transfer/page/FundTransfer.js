@@ -21,7 +21,7 @@ export default function FundTransfer () {
                     </Button>
                 </div>
             </Link>
-            <Link to='debtReminderManagement' style={{ textDecoration: 'none' }}>
+            <Link to='external' style={{ textDecoration: 'none' }}>
                 <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '12vw' }}>
                     <Button className="flex flex-grow">
                         <div className="flex flex-grow flex-col items-center gap-y-2">

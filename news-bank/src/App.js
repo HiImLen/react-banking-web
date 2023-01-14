@@ -10,6 +10,7 @@ import InternalTransferDebt from './app/features/debit/page/InternalTransfer.js'
 import TransactionDebt from './app/features/debit/page/Transaction.js'
 import RecentTransactionEmployee from './app/features/employee/page/RecentTransactionEmployee.js'
 import SignUp from './app/features/employee/page/SignUp.js'
+import ExternalTransfer from './app/features/transfer/page/ExternalTransfer.js'
 import FundTransfer from './app/features/transfer/page/FundTransfer.js'
 import InternalTransfer from './app/features/transfer/page/InternalTransfer.js'
 import OTPVerify from './app/features/transfer/page/OTPVerify.js'
@@ -56,6 +57,7 @@ const App = () => {
           <Route index element={<HomepageCP />} />
           <Route path="transfer" element={<FundTransfer />} />
           <Route exact path="transfer/inter" element={<InternalTransfer />} />
+          <Route exact path="transfer/external" element={<ExternalTransfer/>} />
           <Route exact path="debt" element={<DebtReminder />} />
           <Route exact path="debt/createDebtReminder" element={<CreateDebt />} />
           <Route exact path="debt/debtReminderManagement" element={<DebtReminderManagement />} />

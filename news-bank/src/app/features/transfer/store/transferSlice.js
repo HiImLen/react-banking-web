@@ -28,12 +28,21 @@ export const getSourceAccount = createAsyncThunk(
 
 export const getDestinationAccount = createAsyncThunk(
   'transfer/getDestinationAccount',
-  async ({ accountNumber }, { dispatch, getState }) => {
+  async ({ accountNumber, bankId }, { dispatch, getState }) => {
     try {
-      const res = await instance.get(`/Accounts/${accountNumber}/Internal`)
-      console.log('getDestinationAccount', res)
-      if (res.status === 200 && res.data.status === 'success') {
-        dispatch(setDestinationAccount(res.data.data))
+      console.log("bankId", bankId)
+      if (!bankId) {
+        const res = await instance.get(`/Accounts/${accountNumber}/Internal`)
+        console.log('getDestinationAccount', res)
+        if (res.status === 200 && res.data.status === 'success') {
+          dispatch(setDestinationAccount(res.data.data))
+        }
+      } else {
+        const res = await instance.get(`/Accounts/${accountNumber}/Bank/${bankId}`)
+        console.log('getDestinationAccount', res)
+        if (res.status === 200 && res.data.status === "success"){
+          dispatch(setDestinationAccount(res.data.data))
+        }
       }
     } catch (err) {
       console.log(err)
@@ -44,11 +53,13 @@ export const createTransaction = createAsyncThunk(
   'transfer/createTransaction',
   async ({ data, navigate }, { dispatch, getState }) => {
     try {
+      console.log(data)
       const { sourceAccount } = getState().transfer
       const transactionData = {
         ...data,
+        bank_id: undefined,
         source_account_number: sourceAccount.number,
-        destination_bank_id: 1
+        destination_bank_id: data.bank_id ?? 1,
       }
       console.log(transactionData)
       const res = await instance.post('/Transactions', transactionData)
@@ -132,6 +143,18 @@ export const fetchReceiver = createAsyncThunk(
   }
 )
 
+export const fetchBank = createAsyncThunk(
+  'transfer/fetchBank',
+  async (params, {dispatch, getState}) => {
+    try{
+      const res = await instance.get('/Banks')
+      if (res.status === 200) dispatch(setListBank(res.data.data))
+    }catch(err){
+      console.log(err)
+    }
+  }
+)
+
 export const transferSlice = createSlice({
   name: 'transfer',
   initialState,
@@ -156,9 +179,12 @@ export const transferSlice = createSlice({
     },
     setListReceiver: (state, action) => {
       state.listReceiver = action.payload
+    },
+    setListBank: (state, action) => {
+      state.listBank = action.payload
     }
   }
 })
 
-export const { setSourceAccount, setDestinationAccount, setStatus, setTargetTransactionId, setTransaction, setReceiver,setListReceiver } = transferSlice.actions
+export const { setSourceAccount, setDestinationAccount, setStatus, setTargetTransactionId, setTransaction, setReceiver,setListReceiver,setListBank } = transferSlice.actions
 export default transferSlice.reducer

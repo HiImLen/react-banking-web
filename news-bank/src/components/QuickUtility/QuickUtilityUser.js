@@ -28,15 +28,17 @@ export default function QuickUtility () {
                                 </Button>
                             </Box>
                         </Link>
-                        <Box className="flex border-2 rounded-md">
-                            <Button className="flex flex-grow">
-                                <Box className="flex flex-row flex-grow justify-between px-2">
-                                    <img src={InterbankTransfer} alt='InterbankTransfer'/>
-                                    <Typography className='text-black text-left self-center' style={{ textTransform: 'none' }}>Interbank Transfer</Typography>
-                                    <img src={RightArrow} alt='RightArrow'/>
-                                </Box>
-                            </Button>
-                        </Box>
+                        <Link to='transfer/external' style={{ textDecoration: 'none' }}>
+                            <Box className="flex border-2 rounded-md">
+                                <Button className="flex flex-grow">
+                                    <Box className="flex flex-row flex-grow justify-between px-2">
+                                        <img src={InterbankTransfer} alt='InterbankTransfer'/>
+                                        <Typography className='text-black text-left self-center' style={{ textTransform: 'none' }}>Interbank Transfer</Typography>
+                                        <img src={RightArrow} alt='RightArrow'/>
+                                    </Box>
+                                </Button>
+                            </Box>
+                        </Link>
                         <Box className="flex border-2 rounded-md">
                             <Button className="flex flex-grow">
                                 <Box className="flex flex-row flex-grow justify-between px-2">
