@@ -25,12 +25,12 @@ export default function SideBar () {
                 </Link>
                 <Link to='/transfer' style={{ textDecoration: 'none' }}>
                     <div className='flex flex-row justify-start items-center ml-3 gap-x-2'>
-                        <img src={FundTransferSidebar} alt='FundTransferSidebar'></img>
+                        <img src={CreateCustomerAccount} alt='CreateCustomerAccount'></img>
                         <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Create Customer Account</Typography>
                     </div>
                 </Link>
                 <Link to='/debt' className='flex flex-row justify-center items-center ml-3 gap-x-2' style={{ textDecoration: 'none' }}>
-                    <img src={DebtReminderManagement} alt='DebtReminderManagement'></img>
+                    <img src={DepositMoney} alt='DepositMoney'></img>
                     <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Deposit Money</Typography>
                 </Link>
                 <Link to='/recentTransaction' style={{ textDecoration: 'none' }}>
