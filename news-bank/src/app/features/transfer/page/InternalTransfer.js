@@ -174,11 +174,11 @@ export default function InternalTransfer () {
         </DialogActions>
       </>}
   </Dialog>
-  <Dialog fullWidth={true} maxWidth={'xs'} sx={{ borderRadius: '30px' }} open={openReceiver} onClose={handleClose}>
+  <Dialog fullWidth={true} maxWidth={'xs'} sx={{ borderRadius: '30px' }} open={openReceiver} onClose={() => setOpenReceiver(false)}>
     <DialogTitle className='grid grid-cols-6 text-center text-white' bgcolor='primary.main' >
       <div/>
       <Typography className='text-center col-span-4' color='white'>Receiver</Typography>
-      <Button onClick={handleClose}><img src={Close} alt='Close'/></Button>
+      <Button onClick={() => setOpenReceiver(false)}><img src={Close} alt='Close'/></Button>
     </DialogTitle>
         <DialogContent className='mt-3' sx={{ paddingTop: '15px !important' }}>
           {listReceiver.map((receiver) => 
