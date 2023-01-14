@@ -2,6 +2,7 @@ import { Box, Button, Paper, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import DebtReminder from '../../assets/icon/DebtReminder.svg'
+import InterbankTransfer from '../../assets/img/Quick utility/InterbankTransfer.svg'
 import FundTransfer from '../../assets/icon/FundTransfer.svg'
 import RecentTrans from '../../assets/icon/RecentTrans.svg'
 import ATMPic from '../../assets/img/ATM_pic.svg'
@@ -15,7 +16,12 @@ export default function HomepageCP() {
     const [balance, setBalance] = useState(0)
 
     useEffect(() => {
-        getAccountInformation();
+        if (role_id === 2) {
+        getAccountInformation().then((data) => {
+            setAccountInfo(data.accountInfo);
+            setBalance(data.balance);
+        });
+        }
     }, []);
 
     const getAccountInformation = async (data) => {
@@ -91,7 +97,7 @@ export default function HomepageCP() {
                 elevation={2}
                 sx={{ borderRadius: '10px' }}
             >
-                <Link to='transfer' style={{ textDecoration: 'none' }}>
+                <Link to={role_id === 1? "": role_id === 2? "transfer" : role_id === 3? "signup" : ""} style={{ textDecoration: 'none' }}>
                     <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
                         <Button className="flex flex-grow">
                             <div className="flex flex-grow flex-col items-center gap-y-2">
@@ -101,7 +107,7 @@ export default function HomepageCP() {
                         </Button>
                     </div>
                 </Link>
-                <Link to='debt' style={{ textDecoration: 'none' }}>
+                <Link to={role_id === 1? "": role_id === 2? "debt" : role_id === 3? "deposit" : ""} style={{ textDecoration: 'none' }}>
                     <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
                         <Button className="flex flex-grow">
                             <div className="flex flex-grow flex-col items-center gap-y-2">
@@ -111,16 +117,16 @@ export default function HomepageCP() {
                         </Button>
                     </div>
                 </Link>
-                {role_id !== 1 ? (
+                {role_id === 1 || role_id === 3 ? <></> :  (
                     <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
-                        <Button className="flex flex-grow">
-                            <div className="flex flex-grow flex-col items-center gap-y-2">
-                                <div style={{ height: '59px', width: '59px' }}><img src={RecentTrans} alt='RecentTrans' /></div>
-                                <Typography className='text-black' style={{ textTransform: 'none' }}>Recent Transactions</Typography>
-                            </div>
-                        </Button>
-                    </div>
-                ) : <></>}
+                    <Button className="flex flex-grow">
+                        <div className="flex flex-grow flex-col items-center gap-y-2">
+                            <div style={{ height: '59px', width: '59px' }}><img src={RecentTrans} alt='RecentTrans' /></div>
+                            <Typography className='text-black' style={{ textTransform: 'none' }}>Recent Transactions</Typography>
+                        </div>
+                    </Button>
+                </div>
+                ) }
             </Paper>
         </>
     )

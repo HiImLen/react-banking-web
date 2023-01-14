@@ -3,13 +3,12 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 // import { createTheme } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material'
 import EmployeeManager from './app/features/admin/page/EmployeeManager.js'
+import TransactionsManager from './app/features/admin/page/TransactionsManager.js'
 import CreateDebt from './app/features/debit/page/CreateDebt.js'
 import DebtReminder from './app/features/debit/page/DebtReminder.js'
 import DebtReminderManagement from './app/features/debit/page/DebtReminderManagement.js'
 import InternalTransferDebt from './app/features/debit/page/InternalTransfer.js'
 import TransactionDebt from './app/features/debit/page/Transaction.js'
-import RecentTransactionEmployee from './app/features/employee/page/RecentTransactionEmployee.js'
-import SignUp from './app/features/employee/page/SignUp.js'
 import ExternalTransfer from './app/features/transfer/page/ExternalTransfer.js'
 import FundTransfer from './app/features/transfer/page/FundTransfer.js'
 import InternalTransfer from './app/features/transfer/page/InternalTransfer.js'
@@ -18,8 +17,9 @@ import Transaction from './app/features/transfer/page/Transaction.js'
 import HomepageCP from './components/Homepage/HomepageCP.js'
 import Bank from './views/Bank.js'
 import Forgot from './views/Forgot.js'
-import Login from './views/Login.js'
-import TransactionsManager from './app/features/admin/page/TransactionsManager.js'
+import Login from './app/features/login/page/Login.js'
+import SignUp from './app/features/employee/page/SignUp.js'
+import Deposit from './app/features/employee/page/Deposit.js'
 
 const theme = createTheme({
   palette: {
@@ -67,7 +67,7 @@ const App = () => {
           <Route path='transaction/:id/otpVerify' element={<OTPVerify />} />
           <Route path='transaction/:id/script' element={<Transaction />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="recent" element={<RecentTransactionEmployee />} />
+          <Route path="deposit" element={<Deposit />} />
           <Route exact path="admin/employees" element={<EmployeeManager />} />
           <Route exact path="admin/transactions" element={<TransactionsManager />} />
         </Route>

@@ -29,15 +29,9 @@ export default function SideBarEmployee () {
                         <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Create Customer Account</Typography>
                     </div>
                 </Link>
-                <Link to='/deposit' className='flex flex-row justify-center items-center ml-3 gap-x-2' style={{ textDecoration: 'none' }}>
+                <Link to='/deposit' className='flex flex-row ml-3 gap-x-2' style={{ textDecoration: 'none' }}>
                     <img src={DebtReminderManagement} alt='DebtReminderManagement'></img>
                     <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Deposit Money</Typography>
-                </Link>
-                <Link to='/recent' style={{ textDecoration: 'none' }}>
-                    <div className='flex flex-row justify-left items-center ml-3 gap-x-2'>
-                        <img src={RecentTransSidebar} alt='RecentTransSidebar'></img>
-                        <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Customer’s Recent Transactions</Typography>
-                    </div>
                 </Link>
             </Box>
         </Paper>

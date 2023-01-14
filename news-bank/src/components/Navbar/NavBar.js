@@ -8,7 +8,7 @@ import DownArrow from '../../assets/icon/DownArrow.svg'
 import notification from '../../assets/icon/notification.svg'
 import avt from '../../assets/img/avt.svg'
 import signout from '../../assets/img/signout.svg'
-import { clearLoginInfo } from '../../slice/loginSlice'
+import { clearLoginInfo } from '../../app/features/login/store/loginSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 export default function NavBar () {
