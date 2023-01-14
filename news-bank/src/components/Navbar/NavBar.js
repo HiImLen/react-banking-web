@@ -40,6 +40,75 @@ export default function NavBar () {
   }
 
   return (
-      
+    <div className="flex flex-row justify-between items-center">
+    <Typography className='text-black' style={{ fontWeight: 600 }}>Home</Typography>
+    {/* user menu */}
+    <div className='flex flex-row justify-center items-center space-x-1'>
+      <Button
+          id="basic-button"
+          aria-controls={open ? 'basic-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+          onClick={handleClick2}
+      >
+        <img className='mr-5' src={notification} alt='notification'/>
+
+      </Button>
+      <img src={avt} alt='avatar'/>
+      <Typography className='text-black' style={{ fontWeight: 600 }}>{name}</Typography>
+      <Button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+      >
+          <img src={DownArrow} alt='DownArrow'/>
+      </Button>
+    </div>
+    <Menu
+      id="basic-menu"
+      anchorEl={anchorEl}
+      open={open}
+      onClose={handleClose}
+      MenuListProps={{
+        'aria-labelledby': 'basic-button'
+      }}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right'
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right'
+      }}
+    >
+      <MenuItem className='flex flex-row justify-center space-x-1' onClick={handleLogout}>
+        <img src={signout} alt='signout'/>
+        <Typography style={{ fontWeight: 600 }}>Sign out</Typography>
+      </MenuItem>
+    </Menu>
+    <Menu
+      id="basic-menu2"
+      anchorEl={anchorEl2}
+      open={open2}
+      onClose={handleClose2}
+      MenuListProps={{
+        'aria-labelledby': 'basic-button'
+      }}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right'
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right'
+      }}
+    >
+      <MenuItem className='flex flex-row justify-center space-x-1' >
+        <Typography style={{ fontWeight: 600 }}>Something...</Typography>
+      </MenuItem>
+    </Menu>
+  </div>
   )
 }
