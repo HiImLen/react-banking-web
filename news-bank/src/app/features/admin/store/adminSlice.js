@@ -53,8 +53,22 @@ export const deleteEmployee = createAsyncThunk(
   }
 )
 
+export const getTransactionsList = createAsyncThunk(
+  'admin/getTransactionsList',
+  async (params, { dispatch, getState }) => {
+    try {
+      const res = await instance.get('/Transactions/OtherBanks')
+      if (res.data.status === 'success') {
+        dispatch(setTransactionList(res.data.data))
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+)
+
 export const adminSlice = createSlice({
-  name: 'transfer',
+  name: 'admin',
   initialState,
   reducers: {
     setEmployeeList: (state, action) => {
@@ -62,9 +76,12 @@ export const adminSlice = createSlice({
     },
     removeEmployee: (state, action) => {
       state.employeeList = state.employeeList.filter((employee) => employee.id !== action.payload)
-    }
+    },
+    setTransactionList: (state, action) => {
+      state.transactionList = action.payload
+    },
   }
 })
 
-export const { setEmployeeList, removeEmployee} = adminSlice.actions
+export const { setEmployeeList, removeEmployee, setTransactionList} = adminSlice.actions
 export default adminSlice.reducer
