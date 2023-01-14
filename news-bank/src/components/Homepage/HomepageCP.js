@@ -1,13 +1,12 @@
 import { Box, Button, Paper, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import DebtReminder from '../../assets/icon/DebtReminder.svg'
-import InterbankTransfer from '../../assets/img/Quick utility/InterbankTransfer.svg'
 import FundTransfer from '../../assets/icon/FundTransfer.svg'
 import RecentTrans from '../../assets/icon/RecentTrans.svg'
 import ATMPic from '../../assets/img/ATM_pic.svg'
-import { useSelector } from 'react-redux'
-import { instance, parseJwt } from '../../utils'
+import { instance } from '../../utils'
 
 export default function HomepageCP() {
     const role_id = useSelector((state) => state.login.role_id)
@@ -117,6 +116,7 @@ export default function HomepageCP() {
                         </Button>
                     </div>
                 </Link>
+                <Link to='recentTransaction' style={{ textDecoration: 'none' }}>
                 {role_id === 1 || role_id === 3 ? <></> :  (
                     <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
                     <Button className="flex flex-grow">
@@ -127,6 +127,7 @@ export default function HomepageCP() {
                     </Button>
                 </div>
                 ) }
+                </Link>
             </Paper>
         </>
     )
