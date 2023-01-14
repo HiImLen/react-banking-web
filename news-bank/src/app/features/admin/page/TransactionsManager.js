@@ -62,12 +62,6 @@ export default function TransactionsManager() {
               <TableCell>{transaction.fee}</TableCell>
             </TableRow>
           ))}
-          {/* <TableCell></TableCell>
-          <TableCell></TableCell>
-          <TableCell></TableCell>
-          <TableCell></TableCell>
-          <TableCell></TableCell>
-          <TableCell></TableCell> */}
           <TableCell colSpan="6" align='right'>
             <h5 color='blue'>Total</h5>
           </TableCell>
