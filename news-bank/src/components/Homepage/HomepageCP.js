@@ -96,7 +96,7 @@ export default function HomepageCP() {
                 elevation={2}
                 sx={{ borderRadius: '10px' }}
             >
-                <Link to={role_id === 1? "": role_id === 2? "transfer" : role_id === 3? "signup" : ""} style={{ textDecoration: 'none' }}>
+                <Link to={role_id === 1? "admin/employees": role_id === 2? "transfer" : role_id === 3? "signup" : ""} style={{ textDecoration: 'none' }}>
                     <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
                         <Button className="flex flex-grow">
                             <div className="flex flex-grow flex-col items-center gap-y-2">
@@ -106,7 +106,7 @@ export default function HomepageCP() {
                         </Button>
                     </div>
                 </Link>
-                <Link to={role_id === 1? "": role_id === 2? "debt" : role_id === 3? "deposit" : ""} style={{ textDecoration: 'none' }}>
+                <Link to={role_id === 1? "admin/transactions": role_id === 2? "debt" : role_id === 3? "deposit" : ""} style={{ textDecoration: 'none' }}>
                     <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
                         <Button className="flex flex-grow">
                             <div className="flex flex-grow flex-col items-center gap-y-2">
