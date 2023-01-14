@@ -70,25 +70,25 @@ export default function Admin() {
                 </div>
                 <form className="user" onSubmit={handleSubmit(onAddEmployee)}>
                   <div className="mb-3">
-                    <input className="form-control form-control-user" type="text" id="exampleUserName" placeholder="Username" name="username" autoFocus {...register('username')} />
+                    <input className="form-control form-control-user" type="text" id="exampleUserName" placeholder="Username" name="username" {...register('username')} />
                     {errors.username && <span className="error-message text-danger">{errors.username.message}</span>}
                   </div>
                   <div className="mb-3">
                     <div className="mb-3">
-                      <input className="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" name="password" autoFocus {...register('password')} />
+                      <input className="form-control form-control-user" type="password" id="examplePasswordInput" placeholder="Password" name="password" {...register('password')} />
                       {errors.password && <span className="error-message text-danger">{errors.password.message}</span>}
                     </div>
                   </div>
                   <div className="mb-3">
-                    <input className="form-control form-control-user" type="text" id="exampleName" placeholder="Full Name" name="name" autoFocus {...register('name')} />
+                    <input className="form-control form-control-user" type="text" id="exampleName" placeholder="Full Name" name="name" {...register('name')} />
                     {errors.name && <span className="error-message text-danger">{errors.name.message}</span>}
                   </div>
                   <div className="mb-3">
-                    <input className="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Address" name="email" autoFocus {...register('email')} />
+                    <input className="form-control form-control-user" type="email" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email Address" name="email" {...register('email')} />
                     {errors.email && <span className="error-message text-danger">{errors.email.message}</span>}
                   </div>
                   <div className="mb-3">
-                    <input className="form-control form-control-user" type="text" id="examplePhone" placeholder="Phone Number" name="phone" autoFocus {...register('phone')} />
+                    <input className="form-control form-control-user" type="text" id="examplePhone" placeholder="Phone Number" name="phone" {...register('phone')} />
                     {errors.phone && <span className="error-message text-danger">{errors.phone.message}</span>}
                   </div>
                   <div className="d-flex justify-content-center">
