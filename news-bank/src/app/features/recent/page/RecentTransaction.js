@@ -54,7 +54,7 @@ export default function RecentTransaction () {
 
   useEffect(()=>{
     dispatch(fetchTransaction({time}))
-  },[])
+  },[time])
   
   return (
     <Paper
@@ -111,7 +111,7 @@ export default function RecentTransaction () {
             <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
-                count={12}
+                count={listTransaction.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
