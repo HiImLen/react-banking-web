@@ -3,8 +3,13 @@ import { useNavigate } from 'react-router'
 
 const instance = axios.create({
   baseURL: 'http://localhost:3030/',
-  timeout: 5000,
-  headers: { 'x-access-token': localStorage.token }
+  timeout: 5000
+})
+
+instance.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token")
+  config.headers["x-access-token"] = token
+  return config
 })
 
 instance.interceptors.response.use((response) => {
