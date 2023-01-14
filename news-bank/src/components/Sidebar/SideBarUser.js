@@ -3,9 +3,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import BankLogo from '../../assets/img/BankLogo.svg'
 import LogoSidebar from '../../assets/icon/LogoSidebar.svg'
-import DebtReminderManagement from '../../assets/icon/DebtReminderManagement.svg'
-import FundTransferSidebar from '../../assets/icon/FundTransferSidebar.svg'
-import RecentTransSidebar from '../../assets/icon/RecentTransSidebar.svg'
+import CreateCustomerAccount from '../../assets/icon/CreateCustomerAccount.svg'
+import DepositMoney from '../../assets/icon/DepositMoney.svg'
+import CustomerRecentTransaction from '../../assets/icon/CustomerRecentTransaction.svg'
 
 export default function SideBar () {
   return (
@@ -26,17 +26,17 @@ export default function SideBar () {
                 <Link to='/transfer' style={{ textDecoration: 'none' }}>
                     <div className='flex flex-row justify-start items-center ml-3 gap-x-2'>
                         <img src={FundTransferSidebar} alt='FundTransferSidebar'></img>
-                        <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Fund Transfer</Typography>
+                        <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Create Customer Account</Typography>
                     </div>
                 </Link>
                 <Link to='/debt' className='flex flex-row justify-center items-center ml-3 gap-x-2' style={{ textDecoration: 'none' }}>
                     <img src={DebtReminderManagement} alt='DebtReminderManagement'></img>
-                    <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Debt Reminder Management</Typography>
+                    <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Deposit Money</Typography>
                 </Link>
                 <Link to='/recentTransaction' style={{ textDecoration: 'none' }}>
                     <div className='flex flex-row justify-left items-center ml-3 gap-x-2'>
-                        <img src={RecentTransSidebar} alt='RecentTransSidebar'></img>
-                        <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Recent Transactions</Typography>
+                        <img src={CustomerRecentTransaction} alt='CustomerRecentTransaction'></img>
+                        <Typography className='text-white text-left' style={{ fontWeight: 600 }}>Customer’s Recent Transactions</Typography>
                     </div>
                 </Link>
             </Box>
