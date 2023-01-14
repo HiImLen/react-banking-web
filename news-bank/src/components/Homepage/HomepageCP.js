@@ -1,13 +1,12 @@
 import { Box, Button, Paper, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import DebtReminder from '../../assets/icon/DebtReminder.svg'
-import InterbankTransfer from '../../assets/img/Quick utility/InterbankTransfer.svg'
 import FundTransfer from '../../assets/icon/FundTransfer.svg'
 import RecentTrans from '../../assets/icon/RecentTrans.svg'
 import ATMPic from '../../assets/img/ATM_pic.svg'
-import { useSelector } from 'react-redux'
-import { instance, parseJwt } from '../../utils'
+import { instance } from '../../utils'
 
 export default function HomepageCP() {
     const role_id = useSelector((state) => state.login.role_id)
@@ -95,7 +94,7 @@ export default function HomepageCP() {
                 elevation={2}
                 sx={{ borderRadius: '10px' }}
             >
-                <Link to={role_id === 1 ? "" : role_id === 2 ? "transfer" : role_id === 3 ? "signup" : ""} style={{ textDecoration: 'none' }}>
+                <Link to={role_id === 1? "admin/employees": role_id === 2? "transfer" : role_id === 3? "signup" : ""} style={{ textDecoration: 'none' }}>
                     <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
                         <Button className="flex flex-grow">
                             <div className="flex flex-grow flex-col items-center gap-y-2">
@@ -105,7 +104,7 @@ export default function HomepageCP() {
                         </Button>
                     </div>
                 </Link>
-                <Link to={role_id === 1 ? "" : role_id === 2 ? "debt" : role_id === 3 ? "deposit" : ""} style={{ textDecoration: 'none' }}>
+                <Link to={role_id === 1? "admin/transactions": role_id === 2? "debt" : role_id === 3? "deposit" : ""} style={{ textDecoration: 'none' }}>
                     <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
                         <Button className="flex flex-grow">
                             <div className="flex flex-grow flex-col items-center gap-y-2">
@@ -115,7 +114,7 @@ export default function HomepageCP() {
                         </Button>
                     </div>
                 </Link>
-                <Link to={role_id === 1 ? "" : role_id === 2 ? "" : role_id === 3 ? "lock" : ""} style={{ textDecoration: 'none' }}>
+                <Link to={role_id === 1 ? "recentTransaction" : role_id === 2 ? "" : role_id === 3 ? "lock" : ""} style={{ textDecoration: 'none' }}>
                     {role_id === 1 ? <></> : role_id === 3 ? (
                         <div className="flex rounded-lg" style={{ backgroundColor: '#DAEEFF', height: '10vw', width: '10vw' }}>
                             <Button className="flex flex-grow">

@@ -14,6 +14,7 @@ import FundTransfer from './app/features/transfer/page/FundTransfer.js'
 import InternalTransfer from './app/features/transfer/page/InternalTransfer.js'
 import OTPVerify from './app/features/transfer/page/OTPVerify.js'
 import Transaction from './app/features/transfer/page/Transaction.js'
+import RecentTransaction from './app/features/recent/page/RecentTransaction.js'
 import HomepageCP from './components/Homepage/HomepageCP.js'
 import Bank from './views/Bank.js'
 import Forgot from './views/Forgot.js'
@@ -67,6 +68,7 @@ const App = () => {
           <Route path="debtReminder/:id/script" element={<TransactionDebt />} />
           <Route path='transaction/:id/otpVerify' element={<OTPVerify />} />
           <Route path='transaction/:id/script' element={<Transaction />} />
+          <Route path="recentTransaction" element={<RecentTransaction />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="deposit" element={<Deposit />} />
           <Route path="close" element={<CloseAccount />} />

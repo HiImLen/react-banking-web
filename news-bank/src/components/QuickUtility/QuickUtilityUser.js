@@ -39,6 +39,7 @@ export default function QuickUtility () {
                                 </Button>
                             </Box>
                         </Link>
+                        <Link to='recentTransaction' style={{ textDecoration: 'none' }}>
                         <Box className="flex border-2 rounded-md">
                             <Button className="flex flex-grow">
                                 <Box className="flex flex-row flex-grow justify-between px-2">
@@ -48,6 +49,7 @@ export default function QuickUtility () {
                                 </Box>
                             </Button>
                         </Box>
+                        </Link>
                 </div>
             </Paper>
         </div>
